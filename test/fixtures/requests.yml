@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start: 2016-01-28 17:17:23
+  end: 2016-01-28 17:17:23
+  pickup: false
+  owner_id: 
+
+two:
+  start: 2016-01-28 17:17:23
+  end: 2016-01-28 17:17:23
+  pickup: false
+  owner_id: 

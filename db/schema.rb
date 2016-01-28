@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128204144) do
+ActiveRecord::Schema.define(version: 20160128223105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,27 @@ ActiveRecord::Schema.define(version: 20160128204144) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "petwalks", force: :cascade do |t|
+    t.integer  "walk_id"
+    t.integer  "pet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "petwalks", ["pet_id"], name: "index_petwalks_on_pet_id", using: :btree
+  add_index "petwalks", ["walk_id"], name: "index_petwalks_on_walk_id", using: :btree
+
+  create_table "requests", force: :cascade do |t|
+    t.datetime "start"
+    t.datetime "end"
+    t.boolean  "pickup"
+    t.integer  "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "requests", ["owner_id"], name: "index_requests_on_owner_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -48,6 +69,21 @@ ActiveRecord::Schema.define(version: 20160128204144) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "walks", force: :cascade do |t|
+    t.integer  "walker_id"
+    t.integer  "request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "walks", ["request_id"], name: "index_walks_on_request_id", using: :btree
+  add_index "walks", ["walker_id"], name: "index_walks_on_walker_id", using: :btree
+
   add_foreign_key "ownerships", "pets"
   add_foreign_key "ownerships", "users", column: "owner_id"
+  add_foreign_key "petwalks", "pets"
+  add_foreign_key "petwalks", "walks"
+  add_foreign_key "requests", "users", column: "owner_id"
+  add_foreign_key "walks", "requests"
+  add_foreign_key "walks", "users", column: "walker_id"
 end
