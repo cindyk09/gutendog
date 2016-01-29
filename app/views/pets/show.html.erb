@@ -1,0 +1,10 @@
+<h1><%= @pet.name %></h1>
+<h4>Description</h4>
+<p><%= @pet.description %></p>
+<hr>
+<% if @pet.owners.include?(current_user) %>
+  <%= link_to "All Your Pets", pets_path %>
+  <%= link_to "Edit #{@pet.name }'s Profile", edit_pet_path(@pet) %>
+<% end %>
+<br>
+<%= link_to "Your Profile", current_user %>

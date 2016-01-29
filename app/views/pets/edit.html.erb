@@ -1,0 +1,14 @@
+<h1>Edit <%= @pet.name %></h1>
+<%= form_for @pet do |f| %>
+<div>
+  <%= f.label :name %>
+  <br>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.label :description %>
+  <br>
+  <%= f.text_area :description, cols: 50, rows: 12  %>
+</div>
+  <%= f.submit "Edit #{@pet.name}" %>
+<% end  %>
