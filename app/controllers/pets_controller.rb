@@ -1,6 +1,6 @@
 class PetsController < ApplicationController
   def index
-    @pets = current_user.pets
+    @pets = Pet.all #later to be current_user friends pet's
   end
 
   def new

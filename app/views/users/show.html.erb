@@ -1,4 +1,8 @@
 <h1> <%= @user.name%> </h1>
 <!-- list all pets -->
-<%= render 'pets' %>
+<h1>Your Pets</h1>
+  <ul>
+    <%= render @user.pets %>
+  </ul>
+  <%= link_to "Add Pet", new_pet_path %>
 <!-- list all requests -->
