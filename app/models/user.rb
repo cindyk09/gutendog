@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :walks, :foreign_key => "walker_id"
 
   def name
+    binding.pry
     self.first_name + " " + self.last_name
   end
 end
