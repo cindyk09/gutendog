@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  #Sets the default_url_options for the devise mailer
+  config.action_mailer.default_url_options = { host: 'tranquil-forest-37758.herokuapp.com'}
 end
