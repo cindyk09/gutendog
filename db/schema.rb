@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129153617) do
+ActiveRecord::Schema.define(version: 20160129191527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20160129153617) do
   add_index "petwalks", ["walk_id"], name: "index_petwalks_on_walk_id", using: :btree
 
   create_table "requests", force: :cascade do |t|
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.boolean  "pickup"
     t.integer  "owner_id"
     t.datetime "created_at", null: false
