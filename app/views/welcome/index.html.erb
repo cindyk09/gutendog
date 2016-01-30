@@ -1,3 +1,11 @@
 <h1>Dog Watch</h1>
 
-<iframe src="//giphy.com/embed/a3IWyhkEC0p32" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/thank-you-cute-a3IWyhkEC0p32">via GIPHY</a></p>
+<% if user_signed_in? %>
+
+  <%= render current_user %>
+
+<% else %>
+
+  <iframe src="//giphy.com/embed/a3IWyhkEC0p32" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/thank-you-cute-a3IWyhkEC0p32">via GIPHY</a></p>
+
+<% end %>
