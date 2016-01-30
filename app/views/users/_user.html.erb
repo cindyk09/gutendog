@@ -1,9 +1,18 @@
 <h1> <%= user.name%> </h1>
+<% if user == current_user %>
+  <%= link_to "Edit Profile", edit_user_registration_path %>
+<% end %>
 <!-- list all pets -->
 <h1><%= user.first_name  %>'s Pets</h1>
   <ul>
     <%= render user.pets %>
   </ul>
+<% if user == current_user %>
   <%= link_to "Add Pet", new_pet_path %>
-  <%= link_to "Edit", edit_user_registration_path %>
+<% end %>
+<hr>
 <!-- list all requests -->
+<h1><%= user.first_name  %>'s Walk Requests</h1>
+<% if user == current_user %>
+  <%= link_to "Make Walk Request", new_request_path %>
+<% end %>
