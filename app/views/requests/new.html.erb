@@ -1,2 +1,26 @@
-<h1>Requests#new</h1>
-<p>Find me in app/views/requests/new.html.erb</p>
+<h1>Make A Walk Request</h1>
+
+<%= form_for @request do |f| %>
+
+  <div class="field">
+    <%= f.label :start_time, "Start Time" %>
+    <%= f.datetime_local_field :start_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_time, "End Time" %>
+    <%= f.datetime_local_field :end_time %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:pickup, "Do You Need Your Dog Picked Up?") %>
+    <br>
+    Yes<%= radio_button("request", "pickup", "true") %>
+    No<%= radio_button("request", "pickup", "false") %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Request Walk" %>
+  </div>
+
+<% end %>

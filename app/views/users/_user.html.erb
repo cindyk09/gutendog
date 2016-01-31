@@ -13,6 +13,9 @@
 <hr>
 <!-- list all requests -->
 <h1><%= user.first_name  %>'s Walk Requests</h1>
+<ul>
+  <%= render user.requests %>
+</ul>
 <% if user == current_user %>
   <%= link_to "Make Walk Request", new_request_path %>
 <% end %>
