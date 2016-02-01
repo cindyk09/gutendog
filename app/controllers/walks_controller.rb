@@ -7,14 +7,11 @@ class WalksController < ApplicationController
     walk = Walk.new(walker: current_user, request: request)
     walk.pets = request.owner.pets
 
-    if walk.save #&& request is deleted
-      redirect_to root_path
+    if walk.save
+      redirect_to user_path(request.owner)
     else
-      redirect_to user_path(request.owner)#'users/#{Request.find(params['request_id']).owner.id}'
+      redirect_to user_path(request.owner)
     end
-  end
-
-  def show
   end
 
   def delete
@@ -24,5 +21,10 @@ class WalksController < ApplicationController
   end
 
   def update
+    walk = Walk.find(params['id'])
+    walk.completed = true
+    walk.save
+    #flash message
+    redirect_to root_path
   end
 end

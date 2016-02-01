@@ -1,4 +1,11 @@
-<%= walk.walker.first_name %> is walking
+<!-- 'you are walking' message -->
+<% if !params['id'] %> 
+    You are walking:
+  <% else %>
+    <%= walk.walker.first_name %> is walking:
+<% end %>
+
+<!-- list of pet's on this walk -->
 <ul>
   <% walk.pets.each do |pet| %>
     <li><%= pet.name %></li>
@@ -18,3 +25,13 @@
     <%= walk.request.owner.first_name %> will drop off the pups at your home.
   </p>
 <% end %>
+
+<!-- shows button to walk the dog -->
+<% if !params['id'] %>
+  <%= form_for walk do |f| %>
+    <%= f.submit "Walk Dog" %>
+  <% end %>
+<% end %>
+
+<br><br><hr>
+
