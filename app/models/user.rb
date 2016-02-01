@@ -18,10 +18,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def num_active_requests
+    self.active_requests.size
+  end
+
   def fulfilled_requests
       requests.select do |request|
         !request.active?
       end
+    end
+
+    def karma
+      self.walks.size
     end
 
   def pending_walks
