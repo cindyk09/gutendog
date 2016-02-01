@@ -6,41 +6,47 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-user1 = User.new(
-  first_name: Faker::Name.first_name, 
-  last_name: Faker::Name.last_name, 
-  email: Faker::Internet.email, 
-  address1: Faker::Address.street_address, 
-  address2: Faker::Address.secondary_address, 
-  city: Faker::Address.city, 
-  state: Faker::Address.state, 
-  zipcode: Faker::Address.zip, 
-  password: "password123", 
-  password_confirmation: "password123"
+5.times do
+
+  user1 = User.new(
+    first_name: Faker::Name.first_name, 
+    last_name: Faker::Name.last_name, 
+    email: Faker::Internet.email, 
+    address1: Faker::Address.street_address, 
+    address2: Faker::Address.secondary_address, 
+    city: Faker::Address.city, 
+    state: Faker::Address.state, 
+    zipcode: Faker::Address.zip, 
+    password: "password123", 
+    password_confirmation: "password123"
   )
 
-pet1 = Pet.new(
-  name: Faker::Name.first_name, 
-  description: Faker::Hipster.paragraph
-  )
+  2.times do
+    pet1 = Pet.new(
+      name: Faker::Name.first_name, 
+      description: Faker::Hipster.paragraph
+    )
+    user1.pets << pet1
 
-user1.pets << pet1
+    user1.save
+    pet1.save
+  end
 
-user1.save
-pet1.save
+  2.times do
+    start_time = Faker::Time.forward(rand(30))
+    end_time = start_time += (10000..20000).first
 
-start_time = Faker::Time.forward(rand(30))
-end_time = start_time += (10000..20000).first
+    req = Request.new(
+      start_time: start_time, 
+      end_time: end_time, 
+      pickup: true
+    )
 
-req = Request.new(
-  start_time: start_time, 
-  end_time: end_time, 
-  pickup: true
-  )
-
-user1.requests << req
-
-
+    user1.requests << req
+    req.save
+    user1.save
+  end
+end
 
 # Faker::Time.forward(rand(30))
 
