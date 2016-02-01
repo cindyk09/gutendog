@@ -18,6 +18,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def fulfilled_requests
+      requests.select do |request|
+        !request.active?
+      end
+    end
+
   def pending_walks
     walks.map{ |w| w if !w.completed }.compact
   end

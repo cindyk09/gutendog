@@ -18,5 +18,8 @@
     <%= request.owner.first_name %> will drop off the pups at your home.
   </p>
 <% end %>
-<%= button_to "Accept This Walk Request!", walks_path, params: {request_id: request.id} %>
-
+<% if request.active? %>
+  <%= button_to "Accept This Walk Request!", walks_path, params: {request_id: request.id} %>
+<% else %>
+  <p><%= request.walk.walker.first_name %> will walk the pups</p>
+<% end %>
