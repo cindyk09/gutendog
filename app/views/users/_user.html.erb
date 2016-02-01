@@ -8,7 +8,7 @@
 <% else %>
   <h1><%= user.first_name  %>'s Pets</h1>
 <% end %>
-  
+
   <!-- list of this users pets -->
   <ul>
     <%= render user.pets %>
@@ -20,15 +20,23 @@
 <% end %>
 <hr>
 
-<!-- list all requests -->
+<!-- list all open requests -->
 <% if user == current_user %>
-  <h1>Requests You Made For Other People To Walk Your Dogs</h1>
+  <h1>Open Requests</h1>
 <% else %>
   <h1>Walks <%= user.first_name  %> Has Requested</h1>
 <% end %>
 <ul>
   <%= render user.active_requests %>
 </ul>
+<!-- list all closed requests for current user  -->
+<% if user == current_user %>
+  <h1>Closed Requests</h1>
+  <ul>
+    <%= render user.fulfilled_requests %>
+  </ul>
+<% end %>
+
 
 <!-- make a walk request -->
 <% if user == current_user %>
@@ -37,33 +45,9 @@
 
 <!-- list all scheduled walks -->
 <hr>
-<h1>Walks <%= user.first_name %> have scheduled:</h1>
+<h1>Dogs <%= user.first_name %> Will Walk:</h1>
 <!-- show's message if no walks scheduled -->
 <% if current_user.walks.length == 0 %>
  <em>You have no walks scheduled. Go walk someones pet!</em>
 <% end %>
   <%= render user.pending_walks %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
