@@ -1,7 +1,7 @@
 class PetsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @pets = Pet.all #later to be current_user friends pet's
+    @pets = current_user.pets
   end
 
   def new
