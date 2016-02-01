@@ -19,7 +19,9 @@
   </p>
 <% end %>
 <% if request.active? %>
-  <%= button_to "Accept This Walk Request!", walks_path, params: {request_id: request.id} %>
+  <div class="accept-request">
+    <%= button_to "Accept This Walk Request!", walks_path, params: {request_id: request.id} %>
+  </div>
 <% else %>
   <p><%= request.walk.walker.first_name %> will walk the pups</p>
 <% end %>

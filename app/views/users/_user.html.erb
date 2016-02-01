@@ -16,7 +16,9 @@
 
 <!-- add a pet -->
 <% if user == current_user %>
-  <%= link_to "Add Pet", new_pet_path %>
+  <div class="add-pet">
+    <%= link_to "Add Pet", new_pet_path %>
+  </div>
 <% end %>
 <hr>
 
