@@ -1,16 +1,27 @@
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.first_name %></strong>.
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path %> |
-  <%= link_to "Login", new_user_session_path %>
-<% end %>
+<nav class="navbar">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Home</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <% if user_signed_in? %>
+        <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete %><span class="sr-only">(current)</span></li>
+      <% else %>
+        <li class="active"><%= link_to "Sign up", new_user_registration_path %><span class="sr-only">(current)</span></li>
+        <li class="active"><%= link_to "Login", new_user_session_path %><span class="sr-only">(current)</span></li>
+      <% end %>
 
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-
-<%= link_to "Home", root_path %>
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+  <% if user_signed_in? %>
+  <p class="navbar-text">Welcome <strong><%= current_user.first_name %></strong></p>
+  <% end %>
+</nav>
