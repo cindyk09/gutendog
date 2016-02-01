@@ -21,10 +21,12 @@ class WalksController < ApplicationController
   end
 
   def update
-    walk = Walk.find(params['id'])
-    walk.completed = true
-    walk.save
-    #flash message
-    redirect_to root_path
+    @walk = Walk.find(params['id'])
+    @walk.completed = true
+    @walk.save
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js {  }
+    end
   end
 end
