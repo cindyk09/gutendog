@@ -5,4 +5,10 @@ class Request < ActiveRecord::Base
   def active?
     !self.walk
   end
+
+  def self.active_requests
+    self.all.select do |request|
+      request.active?
+    end
+  end
 end

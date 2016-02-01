@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.all #eventually we want this to be just our friends
+  end
+
   def new
     @user = User.new
   end
