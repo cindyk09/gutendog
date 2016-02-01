@@ -11,4 +11,10 @@ class User < ActiveRecord::Base
   def name
     self.first_name + " " + self.last_name
   end
+
+  def active_requests
+    requests.select do |request|
+      request.active?
+    end
+  end
 end

@@ -8,13 +8,18 @@
 <% else %>
   <h1><%= user.first_name  %>'s Pets</h1>
 <% end %>
+  
+  <!-- list of this users pets -->
   <ul>
     <%= render user.pets %>
   </ul>
+
+<!-- add a pet -->
 <% if user == current_user %>
   <%= link_to "Add Pet", new_pet_path %>
 <% end %>
 <hr>
+
 <!-- list all requests -->
 <% if user == current_user %>
   <h1>Requests You Made For Other People To Walk Your Dogs</h1>
@@ -22,8 +27,43 @@
   <h1>Walks <%= user.first_name  %> Has Requested</h1>
 <% end %>
 <ul>
-  <%= render user.requests %>
+  <%= render user.active_requests %>
 </ul>
+
+<!-- make a walk request -->
 <% if user == current_user %>
   <%= link_to "Make Walk Request", new_request_path %>
 <% end %>
+
+<!-- list all scheduled walks -->
+<hr>
+<h1>Walks <%= user.first_name %> have scheduled:</h1>
+<!-- show's message if no walks scheduled -->
+<% if current_user.walks.length == 0 %>
+ <em>You have no walks scheduled. Go walk someones pet!</em>
+<% end %>
+  <%= render user.walks %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
