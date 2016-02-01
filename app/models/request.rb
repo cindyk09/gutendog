@@ -3,6 +3,6 @@ class Request < ActiveRecord::Base
   has_one :walk
 
   def active?
-    !!self.walk
+    !self.walk
   end
 end
