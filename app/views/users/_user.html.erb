@@ -3,7 +3,11 @@
   <%= link_to "Edit Profile", edit_user_registration_path %>
 <% end %>
 <!-- list all pets -->
-<h1><%= user.first_name  %>'s Pets</h1>
+<% if user == current_user %>
+  <h1>Your Pets</h1>
+<% else %>
+  <h1><%= user.first_name  %>'s Pets</h1>
+<% end %>
   <ul>
     <%= render user.pets %>
   </ul>
@@ -12,7 +16,11 @@
 <% end %>
 <hr>
 <!-- list all requests -->
-<h1><%= user.first_name  %>'s Walk Requests</h1>
+<% if user == current_user %>
+  <h1>Requests You Made For Other People To Walk Your Dogs</h1>
+<% else %>
+  <h1>Walks <%= user.first_name  %> Has Requested</h1>
+<% end %>
 <ul>
   <%= render user.requests %>
 </ul>
