@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
       request.active?
     end
   end
+
+  def pending_walks
+    walks.map{ |w| w if !w.completed }.compact
+  end
 end
