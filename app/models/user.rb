@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
     end
 
     def karma
-      self.walks.size
+      self.walks.select{|walk| walk.completed}.size
     end
 
   def pending_walks

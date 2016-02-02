@@ -3,7 +3,7 @@
 
 
   <!-- 'you are walking' message -->
-  <% if !params['id'] %> 
+  <% if !params['id'] %>
       You are walking:
     <% else %>
       <%= walk.walker.first_name %> is walking:
@@ -34,7 +34,8 @@
   <% if !params['id'] %>
     <%= form_for walk, remote: true do |f| %>
     <div>
-      <%= f.submit "Walk Dog" %>
+      <%= f.label "Click To Let The Owner Know You Walked The Dog" %>
+      <%= f.submit "Finish Walk" %>
     </div>
     <% end %>
   <% end %>
