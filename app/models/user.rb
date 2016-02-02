@@ -48,11 +48,11 @@ class User < ActiveRecord::Base
       # user.image = auth.info.image # assuming the user model has an image
     end
   end
-
-  def parse_name(user, name)
+  private
+  def self.parse_name(user, name)
     name_arr = name.split(" ")
-    name.last_name = name_arr.pop
-    name.first_name = name_arr.join(" ")
+    user.last_name = name_arr.pop
+    user.first_name = name_arr.join(" ")
   end
 
 end
