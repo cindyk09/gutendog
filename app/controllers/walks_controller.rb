@@ -6,10 +6,15 @@ class WalksController < ApplicationController
 
   def create
     request = Request.find(params['request_id'])
-    walk = Walk.new(walker: current_user, request: request)
-    walk.pets = request.owner.pets
+    @walk = Walk.new(walker: current_user, request: request)
+    @walk.pets = request.owner.pets
 
-    if walk.save
+    if @walk.save
+
+      notif = Notification.new(walk: @walk, recipient: @walk.request.owner)
+      notif.message = notif.request_accepted
+      notif.save
+
       redirect_to user_path(request.owner)
     else
       redirect_to user_path(request.owner)
@@ -29,10 +34,17 @@ class WalksController < ApplicationController
   def update
     @walk = Walk.find(params['id'])
     @walk.completed = true
-    @walk.save
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.js {  }
+    if @walk.save
+
+      notif = Notification.new(walk: @walk, recipient: @walk.request.owner)
+      notif.message = notif.dog_walked
+      notif.save
+
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js {  }
+      end
+
     end
   end
 end
