@@ -59,3 +59,6 @@ end
 
 # For Style
 gem 'bootstrap-sass', '~> 3.3.6'
+
+# Omniauth Facebook
+gem 'omniauth-facebook'
