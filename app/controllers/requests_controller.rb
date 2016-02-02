@@ -1,4 +1,6 @@
 class RequestsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @requests = Request.active_requests #requests should only be seen by friends
   end

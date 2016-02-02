@@ -28,15 +28,31 @@
 <% else %>
   <h1>Walks <%= user.first_name  %> Has Requested</h1>
 <% end %>
-<ul>
-  <%= render user.active_requests %>
-</ul>
+<div class="row">
+  <% user.active_requests.each do |request| %>
+    <div class="col-xs-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= render request %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <!-- list all closed requests for current user  -->
 <% if user == current_user %>
   <h1>Closed Requests</h1>
-  <ul>
-    <%= render user.fulfilled_requests %>
-  </ul>
+  <div class="row">
+    <% user.fulfilled_requests.each do |request| %>
+      <div class="col-xs-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= render request %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 
@@ -52,4 +68,14 @@
 <% if current_user.walks.length == 0 %>
  <em>You have no walks scheduled. Go walk someones pet!</em>
 <% end %>
-  <%= render user.pending_walks %>
+<div class="row">
+  <% user.pending_walks.each do |walk| %>
+    <div class="col-xs-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= render walk %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
