@@ -8,16 +8,17 @@ class WalksController < ApplicationController
     request = Request.find(params['request_id'])
     @walk = Walk.new(walker: current_user, request: request)
     @walk.pets = request.owner.pets
-
+    
     if @walk.save
 
       notif = Notification.new(walk: @walk, recipient: @walk.request.owner)
       notif.message = notif.request_accepted
       notif.save
 
-      redirect_to user_path(request.owner)
-    else
-      redirect_to user_path(request.owner)
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user) }
+        format.js {  }
+      end
     end
   end
 
@@ -44,7 +45,6 @@ class WalksController < ApplicationController
         format.html { redirect_to root_path }
         format.js {  }
       end
-
     end
   end
 end
