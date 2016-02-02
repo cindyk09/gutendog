@@ -22,6 +22,10 @@ class WalksController < ApplicationController
   def edit
   end
 
+  def show
+    @walk = Walk.find(params['id'])
+  end
+
   def update
     @walk = Walk.find(params['id'])
     @walk.completed = true

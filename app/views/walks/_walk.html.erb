@@ -16,10 +16,10 @@
     <% end %>
   </ul>
 
-  <strong>Start Time:</strong><%= walk.request.start_time.to_s  %>
-
-  <strong>End Time:</strong><%= walk.request.end_time.to_s  %>
-
+  <strong>Start Time: </strong><%= walk.request.start_time.to_s  %>
+<br>
+  <strong>End Time: </strong><%= walk.request.end_time.to_s  %>
+<br></br>
   <% if walk.request.pickup %>
     <p>
       You need to pickup the pups!
@@ -40,5 +40,4 @@
     <% end %>
   <% end %>
 
-  <br><br><hr>
 </div>
