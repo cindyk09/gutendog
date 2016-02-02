@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  viewed: false
+  clicked: false
+  walk_id: 
+  request_id: 
+  message: MyString
+
+two:
+  user_id: 
+  viewed: false
+  clicked: false
+  walk_id: 
+  request_id: 
+  message: MyString
