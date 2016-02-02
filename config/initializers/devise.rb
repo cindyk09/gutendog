@@ -264,5 +264,5 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   #Adding Facebook omniauth
-  config.omniauth :facebook, "1562025014121829", "a09737b7b44819a6fc1da51e90995911"
+  config.omniauth :facebook, ENV["fb_user_key"], ENV["a09737b7b44819a6fc1da51e90995911"]
 end
