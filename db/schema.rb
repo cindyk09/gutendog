@@ -16,6 +16,21 @@ ActiveRecord::Schema.define(version: 20160202174426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.boolean  "viewed"
+    t.boolean  "clicked"
+    t.integer  "walk_id"
+    t.integer  "request_id"
+    t.string   "message"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
+  add_index "notifications", ["request_id"], name: "index_notifications_on_request_id", using: :btree
+  add_index "notifications", ["walk_id"], name: "index_notifications_on_walk_id", using: :btree
+
   create_table "ownerships", force: :cascade do |t|
     t.integer  "pet_id"
     t.integer  "owner_id"
@@ -93,6 +108,8 @@ ActiveRecord::Schema.define(version: 20160202174426) do
   add_index "walks", ["request_id"], name: "index_walks_on_request_id", using: :btree
   add_index "walks", ["walker_id"], name: "index_walks_on_walker_id", using: :btree
 
+  add_foreign_key "notifications", "requests"
+  add_foreign_key "notifications", "walks"
   add_foreign_key "ownerships", "pets"
   add_foreign_key "ownerships", "users", column: "owner_id"
   add_foreign_key "petwalks", "pets"
