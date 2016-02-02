@@ -6,15 +6,15 @@ class WalksController < ApplicationController
 
   def create
     request = Request.find(params['request_id'])
-    walk = Walk.new(walker: current_user, request: request)
-    walk.pets = request.owner.pets
+    @walk = Walk.new(walker: current_user, request: request)
+    @walk.pets = request.owner.pets
 
-    if walk.save
+    if @walk.save
 
       notif = Notification.new(walk: @walk, recipient: @walk.request.owner)
       notif.message = notif.request_accepted
       notif.save
-      
+
       redirect_to user_path(request.owner)
     else
       redirect_to user_path(request.owner)
