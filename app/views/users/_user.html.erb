@@ -1,4 +1,9 @@
-<h1> <%= user.name%> </h1>
+<h1 class="user-name"> <%= user.name%> </h1>
+<div id="show-peronal-info" style="display:none">
+  <p><%= user.email %></p>
+  <p><%= user.phone_number %></p>
+  <p><%= user.address1 %> <%= user.address2 %> <%= user.city %>, <%= user.state %></p>
+</div>
 <% if user == current_user %>
   <%= link_to "Edit Profile", edit_user_registration_path %>
 <% end %>
