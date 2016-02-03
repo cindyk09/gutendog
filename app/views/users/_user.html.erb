@@ -16,9 +16,17 @@
 <% end %>
 
   <!-- list of this users pets -->
-  <ul>
-    <%= render user.pets %>
-  </ul>
+  <div class="row">
+    <% user.pets.each do |pet| %>
+      <div class="col-xs-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= render pet %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
 <!-- add a pet -->
 <% if user == current_user %>
