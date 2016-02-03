@@ -15,8 +15,24 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$( document ).ready( function () {
+  $('.user-info').on('click', function () {
+      $('#show-peronal-info').toggle('slow', function () {
+      })
+    })
+})
 
 
+// document.addEventListener('DOMContentLoaded', function() {
+   
+// });
+
+// jQuery.noConflict();
+// (function($) {
+//   $(function() {
+   
+//   });
+// })(jQuery);
 
 
 

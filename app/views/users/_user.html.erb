@@ -1,4 +1,10 @@
 <h1> <%= user.name%> </h1>
+<a class="user-info">See User Info</a><br>
+<div id="show-peronal-info" style="display:none">
+  <p>Email: <%= user.email || "n/a"%></p>
+  <p>Phone: <%= user.phone_number || "n/a"%></p>
+  <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
+</div>
 <% if user == current_user %>
   <%= link_to "Edit Profile", edit_user_registration_path %>
 <% end %>
@@ -10,9 +16,17 @@
 <% end %>
 
   <!-- list of this users pets -->
-  <ul>
-    <%= render user.pets %>
-  </ul>
+  <div class="row">
+    <% user.pets.each do |pet| %>
+      <div class="col-xs-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= render pet %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
 <!-- add a pet -->
 <% if user == current_user %>
@@ -32,7 +46,7 @@
   <% user.active_requests.each do |request| %>
     <div class="col-xs-4">
       <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-body" id="request-<%= request.id %>">
           <%= render request %>
           <%= link_to "See Details", request_path(request) %>
         </div>

@@ -10,5 +10,14 @@
   <br>
   <%= f.text_area :description, cols: 50, rows: 12  %>
 </div>
+<div>
+  <%= f.label :image %>
+  <br>
+  <%= f.file_field :image %>
+</div>
+<p>
+  <%= f.label :remote_image_url, "or image URL" %><br />
+  <%= f.text_field :remote_image_url %>
+</p>
   <%= f.submit "Edit #{@pet.name}" %>
 <% end  %>
