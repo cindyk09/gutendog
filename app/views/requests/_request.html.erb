@@ -5,9 +5,9 @@
   <% end %>
 </ul>
 
-<strong>Start Time:</strong><%= request.start_time.to_s  %>
-
-<strong>End Time:</strong><%= request.end_time.to_s  %>
+<strong>Start Time: </strong><%= request.start_time.strftime("%b %e, %l:%M %p")  %>
+<br>
+<strong>End Time: </strong><%= request.end_time.strftime("%b %e, %l:%M %p")  %>
 
 <% if request.pickup %>
   <p>

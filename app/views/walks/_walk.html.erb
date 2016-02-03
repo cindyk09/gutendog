@@ -16,9 +16,9 @@
     <% end %>
   </ul>
 
-  <strong>Start Time: </strong><%= walk.request.start_time.to_s  %>
+  <strong>Start Time: </strong><%= walk.request.start_time.strftime("%b %e, %l:%M %p")  %>
 <br>
-  <strong>End Time: </strong><%= walk.request.end_time.to_s  %>
+  <strong>End Time: </strong><%= walk.request.end_time.strftime("%b %e, %l:%M %p")  %>
 <br></br>
   <% if walk.request.pickup %>
     <p>
