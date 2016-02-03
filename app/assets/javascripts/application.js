@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require_tree .
 $( document ).ready( function () {
-  $('.user-name').on('click', function () {
+  $('.user-info').on('click', function () {
     $('#show-peronal-info').toggle('slow', function () {
     })
   })
