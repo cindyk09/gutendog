@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # Upload Files
 gem 'carrierwave'
 gem 'rmagick'
+# Connect to AWS
+gem "fog"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
