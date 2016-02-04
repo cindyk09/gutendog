@@ -65,6 +65,8 @@ end
 
 # For Style
 gem 'bootstrap-sass', '~> 3.3.6'
+gem "font-awesome-rails"
+gem "fontello-rails"
 
 # Omniauth Facebook
 gem 'omniauth-facebook'
