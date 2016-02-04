@@ -5,6 +5,7 @@
   <p>Phone: <%= user.phone_number || "n/a"%></p>
   <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
 </div>
+<!-- allows signed in user to edit it's own profile -->
 <% if user == current_user %>
   <%= link_to "Edit Profile", edit_user_registration_path %>
 <% end %>

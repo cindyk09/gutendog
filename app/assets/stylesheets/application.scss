@@ -1,7 +1,21 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+@import "fontello";
 
-.navbar-fixed-top {
-       background: #fff !important; /*Add your own background*/
-   }
+//Plugins -->
+  @import "plugins/rs-plugin/css/settings";
+  @import "plugins/rs-plugin/css/extralayers";
+  @import "plugins/magnific-popup/magnific-popup";
+  @import "css/animations";
+  @import "plugins/owl-carousel/owl.carousel";
+
+//<!-- iDea core CSS file -->
+@import "css/style";
+
+//<!-- Color Scheme (In order to change the color scheme, replace the red.css with the color scheme that you prefer)-->
+@import "css/skins/blue";
+
+//<!-- Custom css -->
+@import "css/custom"
