@@ -7,7 +7,9 @@
 
         <!-- header-top-first start -->
         <!-- ================ -->
-
+        <div class="header-top-first clearfix">
+            <p><%= current_user.name if user_signed_in? %></p>
+        </div>
         <!-- header-top-first end -->
 
       </div>
@@ -20,10 +22,16 @@
           <!-- header top dropdowns start -->
           <!-- ================ -->
           <div class="header-top-dropdown">
+            <% if user_signed_in? %>
+            <div class="btn-group dropdown">
+              <button type="button" class="btn"><i class="fa fa-user"></i><%= link_to "Logout", destroy_user_session_path, method: :delete %></button>
+            </div>
+            <% else %>
             <div class="btn-group dropdown">
               <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Login</button>
               <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
                 <li>
+
                   <form class="login-form">
                     <div class="form-group has-feedback">
                       <label class="control-label">E-mail</label>
@@ -33,7 +41,7 @@
                     <div class="form-group has-feedback">
                       <label class="control-label">Password</label>
                       <input type="password" class="form-control" placeholder="">
-                      <i class="fa fa-lock form-control-feedback"></i>
+                      <i class="fa fa-user form-control-feedback"></i>
                     </div>
                     <button type="submit" class="btn btn-group btn-dark btn-sm">Log In</button>
                     <span>or</span>
@@ -48,9 +56,35 @@
                       <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
                     </ul>
                   </form>
+
                 </li>
               </ul>
             </div>
+            <div class="btn-group dropdown">
+              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Login</button>
+              <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
+                <li>
+                  <%= form_for(User.new, url: user_session_path, html:{class:"login-form"}) do |f| %>
+                    <div class="form-group has-feedback">
+                      <%= f.label :email, class:"control-label" %>
+                      <%= f.email_field :email, autofocus: true, class:"form-control", placeholder:""  %>
+                      <i class="fa fa-user form-control-feedback"></i>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                      <%= f.label :password, nil, class: "control-label" %>
+                      <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:""  %>
+                      <i class="fa fa-user form-control-feedback"></i>
+                    </div>
+
+                    <div class="actions">
+                      <%= f.submit "Log in" %>
+                    </div>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+            <% end %>
           </div>
           <!--  header top dropdowns end -->
 
@@ -78,7 +112,7 @@
 
           <!-- logo -->
           <div class="logo">
-            <a href=""><i class="fa fa-paw"></i></a>
+            <a href="/"><img id="logo" src="http://plainicon.com/dboard/userprod/2805_fce53/prod_thumb/plainicon.com-50832-64px-6f0.png" alt="paw"></a>
           </div>
 
           <!-- name-and-slogan -->
