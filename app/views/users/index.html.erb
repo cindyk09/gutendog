@@ -10,7 +10,9 @@
         <div class="panel-body">
           <h4>Pets</h4>
 
-            <%= render user.pets %>
+            <% user.pets.each do |pet| %>
+              <%= link_to image_tag(pet.image_url(:thumb).to_s), pet %>
+            <% end %>
 
           <p><strong><%= link_to "#{user.first_name}'s Open Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
 
