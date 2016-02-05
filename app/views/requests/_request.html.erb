@@ -1,11 +1,6 @@
 <div class="col-sm-6 col-md-4 isotope-item <% if request.active? %>open-requests<% else %>closed-requests <% end %>">
   <div class="box-style-1 white-bg">
-    <h3><%= link_to "Pets to Walk", request_path(request) %></h3>
-    <ul>
-      <% request.owner.pets.each do |pet| %>
-        <li><%= pet.name %></li>
-      <% end %>
-    </ul>
+    <h3>Request to walk <%= request.owner.pets.size %> pups</h3>
     <strong>Start Time: </strong><%= request.start_time.strftime("%b %e, %l:%M %p")  %>
     <br>
     <strong>End Time: </strong><%= request.end_time.strftime("%b %e, %l:%M %p")  %>

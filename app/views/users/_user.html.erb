@@ -74,7 +74,6 @@
               <li><a href="#" data-filter=".open-requests"><%= user.first_name  %>'s' Walk Requests</a></li>
             <% end %>
             <li><a href="#" data-filter=".walks">Dogs <%= user == current_user ? "You" : user.first_name %> Will Walk:</a></li>
-
           </ul>
         </div>
         <!-- isotope filters end -->
@@ -95,7 +94,7 @@
         <% if user == current_user %>
           <%= render user.fulfilled_requests %>
         <% end %>
-        <%= render user.pending_walks %>
+        <%# render user.pending_walks %>
       </div>
       <!-- portfolio items end -->
     </div>
