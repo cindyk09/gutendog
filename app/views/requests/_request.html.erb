@@ -1,27 +1,31 @@
-<h4>Pets</h4>
-<ul>
-  <% request.owner.pets.each do |pet| %>
-    <li><%= pet.name %></li>
-  <% end %>
-</ul>
+<div class="col-sm-6 col-md-4 isotope-item <% if request.active? %>open-requests<% else %>closed-requests <% end %>">
+  <div class="box-style-1 white-bg">
+    <h3><%= link_to "Pets to Walk", request_path(request) %></h3>
+    <ul>
+      <% request.owner.pets.each do |pet| %>
+        <li><%= pet.name %></li>
+      <% end %>
+    </ul>
+    <strong>Start Time: </strong><%= request.start_time.strftime("%b %e, %l:%M %p")  %>
+    <br>
+    <strong>End Time: </strong><%= request.end_time.strftime("%b %e, %l:%M %p")  %>
 
-<strong>Start Time: </strong><%= request.start_time.strftime("%b %e, %l:%M %p")  %>
-<br>
-<strong>End Time: </strong><%= request.end_time.strftime("%b %e, %l:%M %p")  %>
-
-<% if request.pickup %>
-  <p>
-    You need to pickup the pups!
-  </p>
-<% else %>
-  <p>
-    <%= request.owner.first_name %> will drop off the pups at your home.
-  </p>
-<% end %>
-<% if request.active? %>
-  <div class="accept-request">
-    <%= button_to "Accept This Walk Request!", walks_path, remote: true, params: {request_id: request.id} %>
+    <% if request.pickup %>
+      <p>
+        You need to pickup the pups!
+      </p>
+    <% else %>
+      <p>
+        <%= request.owner.first_name %> will drop off the pups at your home.
+      </p>
+    <% end %>
+    <% if request.active? %>
+      <div class="accept-request">
+        <%= button_to "Accept This Walk Request!", walks_path, remote: true, params: {request_id: request.id} %>
+      </div>
+    <% else %>
+      <p><%= request.walk.walker.first_name %> will walk the pups</p>
+    <% end %>
+    <%= link_to "See Details", request_path(request) %>
   </div>
-<% else %>
-  <p><%= request.walk.walker.first_name %> will walk the pups</p>
-<% end %>
+</div>

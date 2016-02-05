@@ -45,41 +45,64 @@
 <% end %>
 <hr>
 
-<!-- list all open requests -->
-<% if user == current_user %>
-  <h1>Open Requests</h1>
-<% else %>
-  <h1>Walks <%= user.first_name  %> Has Requested</h1>
-<% end %>
-<div class="row">
-  <% user.active_requests.each do |request| %>
-    <div class="col-xs-4">
-      <div class="panel panel-default">
-        <div class="panel-body" id="request-<%= request.id %>">
-          <%= render request %>
-          <%= link_to "See Details", request_path(request) %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-<!-- list all closed requests for current user  -->
-<% if user == current_user %>
-  <h1>Closed Requests</h1>
-  <div class="row">
-    <% user.fulfilled_requests.each do |request| %>
-      <div class="col-xs-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= render request %>
-            <%= link_to "See Details", request_path(request) %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
 
+  <div class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="page-title">Walks</h1>
+        <div class="separator-2"></div>
+        <p class="lead">See All Of Your Scheduled Items</p>
+        <!-- page-title end -->
+
+        <!-- isotope filters start -->
+        <div class="filters">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#" data-filter="*">All</a></li>
+            <% if user == current_user %>
+              <li><a href="#" data-filter=".open-requests">Your Open Requests</a></li>
+              <li><a href="#" data-filter=".closed-requests">Your Closed Requests</a></li>
+            <% else %>
+              <li><a href="#" data-filter=".open-requests"><%= user.first_name  %>'s' Walk Requests</a></li>
+            <% end %>
+            <li><a href="#" data-filter=".walks">Dogs <%= user == current_user ? "You" : user.first_name %> Will Walk:</a></li>
+
+          </ul>
+        </div>
+        <!-- isotope filters end -->
+
+      </div>
+      <!-- main end -->
+    </div>
+  </div>
+
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="gray-bg section">
+    <div class="container">
+      <!-- portfolio items start -->
+      <div class="isotope-container row grid-space-10">
+
+        <%= render user.active_requests %>
+        <% if user == current_user %>
+          <%= render user.fulfilled_requests %>
+        <% end %>
+        <%= render user.pending_walks %>
+      </div>
+      <!-- portfolio items end -->
+    </div>
+  </div>
+  <!-- section end -->
+</section>
+<!-- main-container end -->
 
 <!-- make a walk request -->
 <% if user == current_user %>
