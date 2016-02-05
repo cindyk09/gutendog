@@ -10,24 +10,32 @@
   <%= link_to "Edit Profile", edit_user_registration_path %>
 <% end %>
 <!-- list all pets -->
-<% if user == current_user %>
-  <h1>Your Pets</h1>
-<% else %>
-  <h1><%= user.first_name  %>'s Pets</h1>
-<% end %>
 
-  <!-- list of this users pets -->
-  <div class="row">
-    <% user.pets.each do |pet| %>
-      <div class="col-xs-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= render pet %>
-          </div>
-        </div>
-      </div>
+<!-- section start -->
+<!-- ================ -->
+<div class="section clearfix">
+  <div class="container">
+
+    <% if user == current_user %>
+      <h1>Your Pets</h1>
+    <% else %>
+      <h1><%= user.first_name  %>'s Pets</h1>
     <% end %>
+    <div class="space"></div>
+
+    <!-- list of this users pets -->
+
+    <div class="row grid-space-20">
+      <% user.pets.each do |pet| %>
+        <%= render pet %>
+      <% end %>
+    </div>
+    <div class="space"></div>
   </div>
+</div>
+<!-- section end -->
+
+
 
 <!-- add a pet -->
 <% if user == current_user %>
