@@ -11,11 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160203152558) do
+ActiveRecord::Schema.define(version: 20160205185804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
@@ -94,6 +103,8 @@ ActiveRecord::Schema.define(version: 20160203152558) do
     t.inet     "last_sign_in_ip"
     t.string   "provider"
     t.string   "uid"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -110,6 +121,8 @@ ActiveRecord::Schema.define(version: 20160203152558) do
   add_index "walks", ["request_id"], name: "index_walks_on_request_id", using: :btree
   add_index "walks", ["walker_id"], name: "index_walks_on_walker_id", using: :btree
 
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "notifications", "requests"
   add_foreign_key "notifications", "walks"
   add_foreign_key "ownerships", "pets"
