@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  has_many :ownerships, :foreign_key => "owner_id"
+  has_many :ownerships, :foreign_key => "owner_id", dependent: :destroy
   has_many :pets, through: :ownerships
   has_many :requests, :foreign_key => "owner_id"
   has_many :walks, :foreign_key => "walker_id"

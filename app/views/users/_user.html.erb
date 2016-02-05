@@ -1,50 +1,103 @@
-<section class="main-container object-non-visible animated object-visible fadeInUpSmall" data-animation-effect="fadeInUpSmall" data-effect-delay="200" style="margin-top: 0px;">
-  <h1> <%= user.name%> </h1>
-  <a class="user-info">User Info</a><br>
-  <div id="show-peronal-info" style="display:none">
-    <p>Email: <%= user.email || "n/a"%></p>
-    <p>Phone: <%= user.phone_number || "n/a"%></p>
-    <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
-  </div>
-  <!-- allows signed in user to edit it's own profile -->
-  <% if user == current_user %>
-    <%= link_to "Edit Profile", edit_user_registration_path %>
-  <% end %>
-  <!-- list all pets -->
+<!-- page-top start-->
 
-  <!-- section start -->
+<!-- Basic User Info -->
   <!-- ================ -->
-  <div class="section clearfix">
+  <div class="page-top">
     <div class="container">
-
-      <% if user == current_user %>
-        <h1>Your Pets</h1>
-      <% else %>
-        <h1><%= user.first_name  %>'s Pets</h1>
-      <% end %>
-      <div class="space"></div>
-
-      <!-- list of this users pets -->
-
-      <div class="row grid-space-20">
-        <% user.pets.each do |pet| %>
-          <%= render pet %>
-        <% end %>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="call-to-action">
+            <h1 class="title"><%= user.name%></h1>
+            <a class="btn btn-white user-info">
+            User Info<i class="pl-10 fa fa-info"></i>
+            </a>
+            <a class="btn btn-default">
+            Add Friend<i class="pl-10 fa fa-paw"></i>
+            </a>
+            <div id="show-peronal-info" style="display:none">
+              <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
+              <p>Email: <%= user.email || "n/a"%></p>
+              <p>Phone: <%= user.phone_number || "n/a"%></p>
+              <% if user == current_user %>
+              <%= link_to "Edit Profile", edit_user_registration_path %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="space"></div>
     </div>
   </div>
-  <!-- section end -->
-</section>
+  <!-- page-top end -->
 
 
-<!-- add a pet -->
-<% if user == current_user %>
-  <div class="add-pet">
-    <%= link_to "Add Pet", new_pet_path %>
-  </div>
-<% end %>
-<hr>
+  <!-- Show all pets -->
+  <!-- main-container start -->
+  <!-- ================ -->
+  <section class="main-container gray-bg">
+
+    <!-- main start -->
+    <!-- ================ -->
+    <div class="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center title">Pets</h1>
+            <div class="row">
+              <%= render user.pets %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- add a pet -->
+    <% if user == current_user %>
+    <div class="call-to-action">
+      </a>
+        <a class="btn btn-default more" data-toggle="modal" data-target="#myModal">Add Pet<i class="pl-10 fa fa-paw"></i>
+      </a>
+    </div>
+    <% end %>
+    <!-- main end -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add A Pet</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_for Pet.new do |f| %>
+            <div>
+              <%= f.label :name %>
+              <br>
+              <%= f.text_field :name %>
+            </div>
+            <div>
+              <%= f.label :description %>
+              <br>
+              <%= f.text_area :description, cols: 50, rows: 12  %>
+            </div>
+            <div>
+              <%= f.label :image %>
+              <br>
+              <%= f.file_field :image %>
+            </div>
+            <p>
+              <%= f.label :remote_image_url, "or image URL" %><br />
+              <%= f.text_field :remote_image_url %>
+            </p>
+              <%= f.submit "Add Pet", class:"btn btn-default"%>
+            <% end  %>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- main-container end -->
+
+
 
 <!-- main-container start -->
 <!-- ================ -->
@@ -59,13 +112,12 @@
 
         <!-- page-title start -->
         <!-- ================ -->
-        <h1 class="page-title">Walks</h1>
-        <div class="separator-2"></div>
-        <p class="lead">See All Of Your Scheduled Items</p>
+        <h1 class="page-title text-center">Walks</h1>
+        <p class="lead text-center">See All Of Your Requests and Walks</p>
         <!-- page-title end -->
 
         <!-- isotope filters start -->
-        <div class="filters">
+        <div class="filters text-center">
           <ul class="nav nav-pills">
             <li class="active"><a href="#" data-filter="*">All</a></li>
             <% if user == current_user %>
