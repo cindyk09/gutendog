@@ -37,142 +37,16 @@
 			"pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1">
 	-->
 	<body class="front no-trans">
-
-			
 		<!-- page wrapper start -->
 		<!-- ================ -->
 		<div class="page-wrapper">
 
 				<!-- header-top start (Add "dark" class to .header-top in order to enable dark header-top e.g <div class="header-top dark">) -->
 				<!-- ================ -->
-				<%= render 'layouts/header' %>
-				<!-- header end -->
-
-
-			<div class="container">
-				<%= yield %>
-			</div>
-			<!-- main-container start -->
-			<!-- ================ -->
-			<section class="main-container object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="200">
-
-				<div class="container">
-					<div class="row">
-
-						<!-- main start -->
-						<!-- ================ -->
-						<div class="main col-md-12">
-
-						</div>
-						<!-- main end -->
-					</div>
-				</div>
-
-				<% if current_user %>
-					<!-- section start -->
-					<!-- ================ -->
-					<div class="gray-bg section">
-						<div class="container">
-							<!-- portfolio items start -->
-							<div class="isotope-container row grid-space-10">
-								<div class="col-sm-6 col-md-4 isotope-item web-design">
-									<div class="box-style-1 white-bg">
-										<div class="overlay-container">
-											<img src="images/portfolio-1.jpg" alt="">
-											<a href="portfolio-item.html" class="overlay small">
-												<i class="fa fa-plus"></i>
-												<span>Web Design</span>
-											</a>
-										</div>
-										<h3><a href="portfolio-item.html">Project Title</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<a href="portfolio-item.html" class="btn btn-default">Read More</a>
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-4 isotope-item app-development">
-									<div class="box-style-1 white-bg">
-										<div class="overlay-container">
-											<img src="images/portfolio-2.jpg" alt="">
-											<a href="portfolio-item.html" class="overlay small">
-												<i class="fa fa-plus"></i>
-												<span>App Development</span>
-											</a>
-										</div>
-										<h3><a href="portfolio-item.html">Project Title</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<a href="portfolio-item.html" class="btn btn-default">Read More</a>
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-4 isotope-item web-design">
-									<div class="box-style-1 white-bg">
-										<div class="overlay-container">
-											<img src="images/portfolio-3.jpg" alt="">
-											<a href="portfolio-item.html" class="overlay small">
-												<i class="fa fa-plus"></i>
-												<span>Web Design</span>
-											</a>
-										</div>
-										<h3><a href="portfolio-item.html">Project Title</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<a href="portfolio-item.html" class="btn btn-default">Read More</a>
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-4 isotope-item site-building">
-									<div class="box-style-1 white-bg">
-										<div class="overlay-container">
-											<img src="images/portfolio-4.jpg" alt="">
-											<a href="portfolio-item.html" class="overlay small">
-												<i class="fa fa-plus"></i>
-												<span>Site Building</span>
-											</a>
-										</div>
-										<h3><a href="portfolio-item.html">Project Title</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<a href="portfolio-item.html" class="btn btn-default">Read More</a>
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-4 isotope-item app-development">
-									<div class="box-style-1 white-bg">
-										<div class="overlay-container">
-											<img src="images/portfolio-5.jpg" alt="">
-											<a href="portfolio-item.html" class="overlay small">
-												<i class="fa fa-plus"></i>
-												<span>App Development</span>
-											</a>
-										</div>
-										<h3><a href="portfolio-item.html">Project Title</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<a href="portfolio-item.html" class="btn btn-default">Read More</a>
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-4 isotope-item web-design">
-									<div class="box-style-1 white-bg">
-										<div class="overlay-container">
-											<img src="images/portfolio-6.jpg" alt="">
-											<a href="portfolio-item.html" class="overlay small">
-												<i class="fa fa-plus"></i>
-												<span>Web Design</span>
-											</a>
-										</div>
-										<h3><a href="portfolio-item.html">Project Title</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<a href="portfolio-item.html" class="btn btn-default">Read More</a>
-									</div>
-								</div>
-							</div>
-							<!-- portfolio items end -->
-						</div>
-					</div>
-					<!-- section end -->
-					<% end %>
-			</section>
-			<!-- main-container end -->
+			<%= render 'layouts/header' %>
+			<%= yield %>
 
 			<%= render 'layouts/footer' %>
-
-		<!-- JavaScript files placed at the end of the document so the pages load faster
-		================================================== -->
-
-
+		</div>	
 	</body>
 </html>
