@@ -9,11 +9,14 @@ class User < ActiveRecord::Base
   has_many :requests, :foreign_key => "owner_id"
   has_many :walks, :foreign_key => "walker_id"
   has_many :notifications, :foreign_key => "recipient_id"
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   def name
     self.first_name + " " + self.last_name
   end
-
 
   def active_requests
     requests.select do |request|
@@ -49,6 +52,12 @@ class User < ActiveRecord::Base
       # user.image = auth.info.image # assuming the user model has an image
     end
   end
+
+  def friends
+    friend_ids = User.first.friendships.map {|friendship| friendship.friend_id}
+    friend_ids.map {|id| User.find(id)}
+  end
+
   private
   def self.parse_name(user, name)
     name_arr = name.split(" ")
