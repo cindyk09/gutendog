@@ -105,4 +105,9 @@
       </div>
     </div>
   <% end %>
+
+  <% if  %>
+  <div class="friend-request">
+    <%= button_to "Friend Request", friend_request_path, remote: true, params: {friend_id: user.id} %>
+  </div>
 </div>
