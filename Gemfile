@@ -73,3 +73,7 @@ gem 'omniauth-facebook'
 
 #Omniauth hide keys
 gem 'figaro'
+
+#Location finder gems
+gem 'geocoder'
+gem 'gmaps4rails'

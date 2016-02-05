@@ -1,4 +1,13 @@
 <h1>Community</h1>
+  <%= form_tag users_path, :method => :get do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search Near", :name => nil %>
+    </p>
+  <% end %>
+  <% @users.each do |owner| %>
+    <%= owner.name %>
+  <% end %>
 <div class="row">
   <% @users.each do |user| %>
     <div class="col-xs-4 text-center">

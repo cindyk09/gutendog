@@ -3,7 +3,13 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.select { |user| user != current_user  }
-  end
+    if params[:search].present?
+      binding.pry
+     @user = User.near(params[:search], 1, :order => :distance)
+
+   end
+ end
+
 
   def new
     @user = User.new
