@@ -11,9 +11,13 @@
             <a class="btn btn-white user-info">
             User Info<i class="pl-10 fa fa-info"></i>
             </a>
-            <a class="btn btn-default">
+            <!-- <a class="btn btn-default">
             Add Friend<i class="pl-10 fa fa-paw"></i>
-            </a>
+            </a> -->
+            <% if !current_user.friends.include?(user) %>
+                <%= button_to "Friend Request", friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"}%>
+                <i class="pl-10 fa fa-paw"></i>
+            <% end %>
             <div id="show-peronal-info" style="display:none">
               <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
               <p>Email: <%= user.email || "n/a"%></p>
@@ -180,9 +184,4 @@
       </div>
     </div>
   <% end %>
-
-  <% if  %>
-  <div class="friend-request">
-    <%= button_to "Friend Request", friend_request_path, remote: true, params: {friend_id: user.id} %>
-  </div>
 </div>
