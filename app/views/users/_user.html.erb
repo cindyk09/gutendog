@@ -8,15 +8,16 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="call-to-action">
             <h1 class="title"><%= user.name%></h1>
-            <a class="btn btn-white user-info">
-            User Info<i class="pl-10 fa fa-info"></i>
-            </a>
+              <a class="btn btn-white user-info">
+                User Info<i class="pl-10 fa fa-info"></i>
+              </a>
             <!-- <a class="btn btn-default">
             Add Friend<i class="pl-10 fa fa-paw"></i>
             </a> -->
-            <% if !current_user.friends.include?(user) %>
-                <%= button_to "Friend Request", friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"}%>
-                <i class="pl-10 fa fa-paw"></i>
+            <% if !current_user.friends.include?(user) && user != current_user %>
+              <%= button_to friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"} do %>
+              Add Friend<i class="pl-10 fa fa-paw"></i>
+              <% end %>
             <% end %>
             <div id="show-peronal-info" style="display:none">
               <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
