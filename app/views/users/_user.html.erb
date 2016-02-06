@@ -8,22 +8,28 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="call-to-action">
             <h1 class="title"><%= user.name%></h1>
-            <a class="btn btn-white user-info">
-            User Info<i class="pl-10 fa fa-info"></i>
-            </a>
+              <a class="btn btn-white user-info">
+                User Info<i class="pl-10 fa fa-info"></i>
+              </a>
             <!-- <a class="btn btn-default">
             Add Friend<i class="pl-10 fa fa-paw"></i>
             </a> -->
-            <% if !current_user.friends.include?(user) %>
-                <%= button_to "Friend Request", friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"}%>
-                <i class="pl-10 fa fa-paw"></i>
+            <% if !current_user.friends.include?(user) && user != current_user %>
+              <%= button_to friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"} do %>
+              Add Friend<i class="pl-10 fa fa-paw"></i>
+              <% end %>
             <% end %>
             <div id="show-peronal-info" style="display:none">
               <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
               <p>Email: <%= user.email || "n/a"%></p>
               <p>Phone: <%= user.phone_number || "n/a"%></p>
               <% if user == current_user %>
-              <%= link_to "Edit Profile", edit_user_registration_path %>
+              <div class="call-to-action">
+                </a>
+                  <a class="btn btn-default more" data-toggle="modal" data-target="#editProfileModal">Edit Profile<i class="pl-10 fa fa-user"></i>
+                </a>
+              </div>
+              <%= render 'users/editProfileModal' %>
               <% end %>
             </div>
           </div>
@@ -57,46 +63,13 @@
     <% if user == current_user %>
     <div class="call-to-action">
       </a>
-        <a class="btn btn-default more" data-toggle="modal" data-target="#myModal">Add Pet<i class="pl-10 fa fa-paw"></i>
+        <a class="btn btn-default more" data-toggle="modal" data-target="#addPetModal">Add Pet<i class="pl-10 fa fa-paw"></i>
       </a>
     </div>
     <% end %>
     <!-- main end -->
+    <%= render 'users/addPetModal' %>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add A Pet</h4>
-          </div>
-          <div class="modal-body">
-            <%= form_for Pet.new do |f| %>
-            <div>
-              <%= f.label :name %>
-              <br>
-              <%= f.text_field :name %>
-            </div>
-            <div>
-              <%= f.label :description %>
-              <br>
-              <%= f.text_area :description, cols: 50, rows: 12  %>
-            </div>
-            <div>
-              <%= f.label :image %>
-              <br>
-              <%= f.file_field :image %>
-            </div>
-            <p>
-              <%= f.label :remote_image_url, "or image URL" %><br />
-              <%= f.text_field :remote_image_url %>
-            </p>
-              <%= f.submit "Add Pet", class:"btn btn-default"%>
-            <% end  %>
-        </div>
-      </div>
-    </div>
 
   </section>
   <!-- main-container end -->
@@ -145,43 +118,47 @@
   <div class="gray-bg section">
     <div class="container">
       <!-- portfolio items start -->
-      <div class="isotope-container row grid-space-10">
-
+      <div class="isotope-container row equal-height-panels grid-space-10">
         <%= render user.active_requests %>
         <% if user == current_user %>
           <%= render user.fulfilled_requests %>
         <% end %>
-        <%# render user.pending_walks %>
+        <%= render user.pending_walks %>
       </div>
       <!-- portfolio items end -->
     </div>
+    <!-- make a walk request -->
+    <% if user == current_user %>
+    <div class="call-to-action">
+      </a>
+        <a class="btn btn-default more" data-toggle="modal" data-target="#requestModal">Request A Walk<i class="pl-10 fa fa-paw"></i>
+      </a>
+    </div>
+    <%= render 'users/requestModal' %>
+    <% end %>
   </div>
   <!-- section end -->
 </section>
 <!-- main-container end -->
 
-<!-- make a walk request -->
-<% if user == current_user %>
-  <%= link_to "Make Walk Request", new_request_path %>
-<% end %>
 
 <!-- list all scheduled walks -->
-<hr>
-<h1>Dogs <%= user.first_name %> Will Walk:</h1>
+<!-- <hr> -->
+<!-- <h1>Dogs <%#= user.first_name %> Will Walk:</h1> -->
 <!-- show's message if no walks scheduled -->
-<% if current_user.walks.length == 0 %>
- <em>You have no walks scheduled. Go walk someones pet!</em>
-<% end %>
-<div class="row">
-  <% user.pending_walks.each do |walk| %>
-    <div class="col-xs-4">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <%= render walk %>
-          <hr>
-          <%= link_to "View Walk Details", walk_path(walk) %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%# if current_user.walks.length == 0 %>
+ <!-- <em>You have no walks scheduled. Go walk someones pet!</em> -->
+<%# end %>
+<!-- <div class="row"> -->
+  <%#= user.pending_walks.each do |walk| %>
+    <!-- <div class="col-xs-4"> -->
+      <!-- <div class="panel panel-default"> -->
+        <!-- <div class="panel-body"> -->
+          <%#= render walk %>
+          <!-- <hr> -->
+          <%# link_to "View Walk Details", walk_path(walk) %>
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <%# end %>
+<!-- </div> -->

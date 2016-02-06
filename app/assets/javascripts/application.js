@@ -13,7 +13,6 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require turbolinks
 //= require plugins/jquery.min
 //= require plugins/modernizr
 //= require plugins/rs-plugin/js/jquery.themepunch.tools.min
@@ -34,7 +33,6 @@
 $( document ).on('ready page:load', function () {
   $('.user-info').on('click', function () {
       $('#show-peronal-info').toggle('slow', function () {
-      })
-    })
-})
-
+      });
+    });
+});
