@@ -58,19 +58,19 @@
     <% if user == current_user %>
     <div class="call-to-action">
       </a>
-        <a class="btn btn-default more" data-toggle="modal" data-target="#myModal">Add Pet<i class="pl-10 fa fa-paw"></i>
+        <a class="btn btn-default more" data-toggle="modal" data-target="#addPetModal">Add Pet<i class="pl-10 fa fa-paw"></i>
       </a>
     </div>
     <% end %>
     <!-- main end -->
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addPetModal" tabindex="-1" role="dialog" aria-labelledby="addPetMOdalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add A Pet</h4>
+            <h4 class="modal-title" id="addPetModal">Add A Pet</h4>
           </div>
           <div class="modal-body">
             <%= form_for Pet.new do |f| %>
@@ -146,8 +146,7 @@
   <div class="gray-bg section">
     <div class="container">
       <!-- portfolio items start -->
-      <div class="isotope-container row grid-space-10">
-
+      <div class="isotope-container row equal-height-panels grid-space-10">
         <%= render user.active_requests %>
         <% if user == current_user %>
           <%= render user.fulfilled_requests %>

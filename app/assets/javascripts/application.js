@@ -34,7 +34,6 @@
 $( document ).on('ready page:load', function () {
   $('.user-info').on('click', function () {
       $('#show-peronal-info').toggle('slow', function () {
-      })
-    })
-})
-
+      });
+    });
+});
