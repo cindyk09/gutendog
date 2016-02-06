@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.select { |user| user != current_user  }
+    @users = @users.sort_by { |user| user.last_name  }
   end
 
   def new
