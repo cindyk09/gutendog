@@ -151,37 +151,41 @@
         <% if user == current_user %>
           <%= render user.fulfilled_requests %>
         <% end %>
-        <%# render user.pending_walks %>
+        <%= render user.pending_walks %>
       </div>
       <!-- portfolio items end -->
     </div>
+    <!-- make a walk request -->
+    <% if user == current_user %>
+    <div class="call-to-action">
+      </a>
+        <a class="btn btn-default more" data-toggle="modal" data-target="#requestModal">Request A Walk<i class="pl-10 fa fa-paw"></i>
+      </a>
+    </div>
+    <% end %>
   </div>
   <!-- section end -->
 </section>
 <!-- main-container end -->
 
-<!-- make a walk request -->
-<% if user == current_user %>
-  <%= link_to "Make Walk Request", new_request_path %>
-<% end %>
 
 <!-- list all scheduled walks -->
-<hr>
-<h1>Dogs <%= user.first_name %> Will Walk:</h1>
+<!-- <hr> -->
+<!-- <h1>Dogs <%#= user.first_name %> Will Walk:</h1> -->
 <!-- show's message if no walks scheduled -->
-<% if current_user.walks.length == 0 %>
- <em>You have no walks scheduled. Go walk someones pet!</em>
-<% end %>
-<div class="row">
-  <% user.pending_walks.each do |walk| %>
-    <div class="col-xs-4">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <%= render walk %>
-          <hr>
-          <%= link_to "View Walk Details", walk_path(walk) %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%# if current_user.walks.length == 0 %>
+ <!-- <em>You have no walks scheduled. Go walk someones pet!</em> -->
+<%# end %>
+<!-- <div class="row"> -->
+  <%#= user.pending_walks.each do |walk| %>
+    <!-- <div class="col-xs-4"> -->
+      <!-- <div class="panel panel-default"> -->
+        <!-- <div class="panel-body"> -->
+          <%#= render walk %>
+          <!-- <hr> -->
+          <%# link_to "View Walk Details", walk_path(walk) %>
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <%# end %>
+<!-- </div> -->

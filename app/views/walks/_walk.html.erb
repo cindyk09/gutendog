@@ -1,78 +1,35 @@
-<div id="request-<%= walk.id %>-message"></div>
-<div id="request-<%= walk.id %>">
+<div class="col-sm-6 col-md-4 isotope-item walks">
+  <!-- Message tags -->
+  <div id="request-<%= walk.id %>-message"></div>
+  <div id="request-<%= walk.id %>">
+    <div class="box-style-1 white-bg">
+      <!-- Main Info -->
+      <% if walk.walker == current_user %>
+        <h3>You will walk <%= walk.pets.size %> pups for <%= walk.request.owner.first_name %></h3>
+      <% else %>
+        <h3><%= walk.walker.first_name %> will walk <%= walk.pets.size %> pups for <%= walk.request.owner.first_name %></h3>
+      <% end %>
+      <%= link_to "See Details", walk_path(request), data:{no_turbolink: true} %>
 
+      <!-- Walk Times -->
+      <br>
+      <strong>Start Time: </strong><%= walk.request.start_time.strftime("%b %e, %l:%M %p")  %>
+      <br>
+      <strong>End Time: </strong><%= walk.request.end_time.strftime("%b %e, %l:%M %p")  %>
 
-  <!-- 'you are walking' message -->
-  <% if !params['id'] %>
-      You are walking:
-    <% else %>
-      <%= walk.walker.first_name %> is walking:
-  <% end %>
+      <!-- Pick up or Drop Off -->
+      <% if walk.request.pickup %>
+        <p>Pick up the pups from <%= walk.request.owner.first_name %></p>
+      <% else %>
+        <p><%= walk.request.owner.first_name %> will bring the pups to you.</p>
+      <% end %>
 
-  <!-- list of pet's on this walk -->
-  <ul>
-    <% walk.pets.each do |pet| %>
-      <li><%= pet.name %></li>
-    <% end %>
-  </ul>
-
-  <strong>Start Time: </strong><%= walk.request.start_time.strftime("%b %e, %l:%M %p")  %>
-<br>
-  <strong>End Time: </strong><%= walk.request.end_time.strftime("%b %e, %l:%M %p")  %>
-<br></br>
-  <% if walk.request.pickup %>
-    <p>
-      You need to pickup the pups!
-    </p>
-  <% else %>
-    <p>
-      <%= walk.request.owner.first_name %> will drop off the pups at your home.
-    </p>
-  <% end %>
-
-  <!-- shows button to walk the dog -->
-  <% if !params['id'] %>
-    <%= form_for walk, remote: true do |f| %>
-    <div>
-      <%= f.label "Click To Let The Owner Know You Walked The Dog" %>
-      <%= f.submit "Finish Walk" %>
-    </div>
-    <% end %>
-  <% end %>
-
-</div>
-
-<div class="col-sm-6 col-md-4 isotope-item <% if request.active? %>open-requests<% else %>closed-requests <% end %>">
-  <div class="box-style-1 white-bg">
-    <% if user == current_user %>
-      <h3>You will walk <%= request.owner.pets.size %> pups for <%= request.owner.name %></h3>
-    <% else %>
-      <h3>Request to walk <%= request.owner.pets.size %> pups for <%= request.owner.name %></h3>
-    <% end %>
-    <%= link_to "See Details", request_path(request), data:{no_turbolink: true} %>
-    <br>
-    <strong>Start Time: </strong><%= request.start_time.strftime("%b %e, %l:%M %p")  %>
-    <br>
-    <strong>End Time: </strong><%= request.end_time.strftime("%b %e, %l:%M %p")  %>
-
-    <% if request.pickup %>
-      <p>
-        Pick up the pups from <%= request.owner.first_name %>
-      </p>
-    <% else %>
-      <p>
-        <%= request.owner.first_name %> will bring the pups to you.
-      </p>
-    <% end %>
-    <% if request.active? %>
-      <div class="accept-request">
-        <%= button_to walks_path, remote: true, class:"btn btn-default", params: {request_id: request.id} do %>
-          Accept Walk Request
+      <!-- shows button to walk the dog -->
+      <% if walk.walker == current_user %>
+        <%= form_for walk, remote: true do |f| %>
+          <%= f.submit "Click When You Finish Walk", class:"btn btn-default" %>
         <% end %>
-      </div>
-    <% else %>
-      <p><%= request.walk.walker.first_name %> will walk the pups</p>
-      <div class="space"></div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
