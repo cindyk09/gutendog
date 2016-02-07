@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205165531) do
+
+ActiveRecord::Schema.define(version: 20160205192301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "confirmed",  default: false
+  end
+
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
@@ -111,6 +123,8 @@ ActiveRecord::Schema.define(version: 20160205165531) do
   add_index "walks", ["request_id"], name: "index_walks_on_request_id", using: :btree
   add_index "walks", ["walker_id"], name: "index_walks_on_walker_id", using: :btree
 
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "notifications", "requests"
   add_foreign_key "notifications", "walks"
   add_foreign_key "ownerships", "pets"

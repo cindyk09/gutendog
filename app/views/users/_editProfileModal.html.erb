@@ -1,0 +1,68 @@
+<!-- Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileMdalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="editProfileModal">Request A Walk</h4>
+      </div>
+      <div class="modal-body">
+        <h2>Edit Your Profile</h2>
+        <%= form_for(current_user, url: registration_path(resource), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="text-center field">
+            <%= f.label :email %><br/>
+            <%= f.email_field :email, autofocus: true %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="text-center field">
+            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+
+          <div class="text-center field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
+
+          <div class="text-center address1">
+            <%= f.label :address1, "Address 1" %><br />
+            <%= f.text_field :address1 %>
+          </div>
+          <div class="text-center address2">
+            <%= f.label :address2, "Address 2" %><br />
+            <%= f.text_field :address2 %>
+          </div>
+          <div class="text-center city">
+            <%= f.label :city %><br />
+            <%= f.text_field :city %>
+          </div>
+          <div class="text-center state">
+            <%= f.label :state %><br />
+            <%= f.text_field :state %>
+          </div>
+          <div class="text-center zipcode">
+            <%= f.label :zipcode %><br />
+            <%= f.text_field :zipcode %>
+          </div>
+          <div class="text-center phone number">
+            <%= f.label :phone_number %><br />
+            <%= f.telephone_field :phone_number %>
+          </div>
+
+          <div class="text-center actions">
+            <%= f.submit "Update", class:"btn btn-default"%>
+          </div>
+        <% end %>
+        <div class="text-center actions">
+          <p>Unhappy? Cancel my account <%= button_to "Cancel my account", registration_path(resource), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-default" %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<!-- Modal -->
+<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="requestModal">Request A Walk</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for Request.new(start_time: DateTime.now, end_time: DateTime.now) do |f| %>
+
+          <div class="text-center">
+            <%= f.label :start_time, "Start Time" %>
+            <%= f.datetime_local_field :start_time %>
+          </div>
+
+          <div class="text-center">
+            <%= f.label :end_time, "End Time" %>
+            <%= f.datetime_local_field :end_time %>
+          </div>
+
+          <div class="text-center">
+            <%= label_tag(:pickup, "Do You Need Your Dog Picked Up?") %>
+            <br>
+            Yes<%= radio_button("request", "pickup", "true") %>
+            No<%= radio_button("request", "pickup", "false") %>
+          </div>
+          <div class="space">
+
+          </div>
+          <div class="text-center">
+            <%= f.submit "Request Walk", class:"btn btn-default" %>
+          </div>
+
+        <% end %>
+    </div>
+  </div>
+</div>
+</div>

@@ -10,6 +10,8 @@ class UsersController < ApplicationController
    end
  end
 
+  end
+
 
   def new
     @user = User.new

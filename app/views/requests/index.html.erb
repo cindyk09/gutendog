@@ -1,16 +1,74 @@
-<h1>All Open Requests</h1>
-<div class="row">
-  <% @requests.each do |request| %>
-    <div class="col-xs-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title"><%=link_to request.owner.name, user_path(request.owner) %></h3>
-        </div>
-        <div class="panel-body" id="request-<%= request.id %>">
-          <%= render request %>
-          <%= link_to "See Details", request_path(request) %>
-        </div>
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+  <di v class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="text-center title">Requests</h1>
+        <p class="text-center title">All Open Requests<br class="hidden-sm hidden-xs"></p>
+        <!-- page-title end -->
+
       </div>
+      <!-- main end -->
     </div>
-  <% end %>
-</div>
+  </div>
+
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="gray-bg section">
+    <div class="container">
+      <!-- portfolio items start -->
+
+      <div class="isotope-container row grid-space-10">
+        <!-- All members block -->
+        <% @requests.each do |request| %>
+        <div class="col-sm-6 col-md-4 isotope-item app-development">
+          <div class="box-style-1 white-bg">
+            <h2 class="text-center title"><%=link_to request.owner.name, user_path(request.owner) %></h2>
+            <div class="panel-body" id="request-<%= request.id %>">
+              <h3>Request to walk <%= request.owner.pets.size %> pups for <%= request.owner.name %></h3>
+
+              <%= link_to "See Details", request_path(request), data:{no_turbolink: true} %>
+              <br>
+              <strong>Start Time: </strong><%= request.start_time.strftime("%b %e, %l:%M %p")  %>
+              <br>
+              <strong>End Time: </strong><%= request.end_time.strftime("%b %e, %l:%M %p")  %>
+
+              <% if request.pickup %>
+                <p>
+                  Pick up the pups from <%= request.owner.first_name %>
+                </p>
+              <% else %>
+                <p>
+                  <%= request.owner.first_name %> will bring the pups to you.
+                </p>
+              <% end %>
+
+              <% if request.active? %>
+                <div class="accept-request">
+                  <%= button_to walks_path, remote: true, class:"btn btn-default", params: {request_id: request.id} do %>
+                    Accept Walk Request
+                  <% end %>
+                </div>
+              <% else %>
+                <p><%= request.walk.walker.first_name %> will walk the pups</p>
+                <div class="space"></div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <!-- portfolio items end -->
+    </div>
+  </div>
+  <!-- section end -->
+</section>
+<!-- main-container end -->

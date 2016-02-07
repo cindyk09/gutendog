@@ -1,108 +1,164 @@
-<h1> <%= user.name%> </h1>
-<a class="user-info">User Info</a><br>
-<div id="show-peronal-info" style="display:none">
-  <p>Email: <%= user.email || "n/a"%></p>
-  <p>Phone: <%= user.phone_number || "n/a"%></p>
-  <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
-</div>
-<!-- allows signed in user to edit it's own profile -->
-<% if user == current_user %>
-  <%= link_to "Edit Profile", edit_user_registration_path %>
-<% end %>
-<!-- list all pets -->
+<!-- page-top start-->
 
-<!-- section start -->
-<!-- ================ -->
-<div class="section clearfix">
-  <div class="container">
-
-    <% if user == current_user %>
-      <h1>Your Pets</h1>
-    <% else %>
-      <h1><%= user.first_name  %>'s Pets</h1>
-    <% end %>
-    <div class="space"></div>
-
-    <!-- list of this users pets -->
-
-    <div class="row grid-space-20">
-      <% user.pets.each do |pet| %>
-        <%= render pet %>
-      <% end %>
-    </div>
-    <div class="space"></div>
-  </div>
-</div>
-<!-- section end -->
-
-
-
-<!-- add a pet -->
-<% if user == current_user %>
-  <div class="add-pet">
-    <%= link_to "Add Pet", new_pet_path %>
-  </div>
-<% end %>
-<hr>
-
-<!-- list all open requests -->
-<% if user == current_user %>
-  <h1>Open Requests</h1>
-<% else %>
-  <h1>Walks <%= user.first_name  %> Has Requested</h1>
-<% end %>
-<div class="row">
-  <% user.active_requests.each do |request| %>
-    <div class="col-xs-4">
-      <div class="panel panel-default">
-        <div class="panel-body" id="request-<%= request.id %>">
-          <%= render request %>
-          <%= link_to "See Details", request_path(request) %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-<!-- list all closed requests for current user  -->
-<% if user == current_user %>
-  <h1>Closed Requests</h1>
-  <div class="row">
-    <% user.fulfilled_requests.each do |request| %>
-      <div class="col-xs-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= render request %>
-            <%= link_to "See Details", request_path(request) %>
+<!-- Basic User Info -->
+  <!-- ================ -->
+  <div class="page-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="call-to-action">
+            <h1 class="title"><%= user.name%></h1>
+              <a class="btn btn-white user-info">
+                User Info<i class="pl-10 fa fa-info"></i>
+              </a>
+            <!-- <a class="btn btn-default">
+            Add Friend<i class="pl-10 fa fa-paw"></i>
+            </a> -->
+            <% if !current_user.friends.include?(user) && user != current_user %>
+              <%= button_to friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"} do %>
+              Add Friend<i class="pl-10 fa fa-paw"></i>
+              <% end %>
+            <% end %>
+            <div id="show-peronal-info" style="display:none">
+              <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>
+              <p>Email: <%= user.email || "n/a"%></p>
+              <p>Phone: <%= user.phone_number || "n/a"%></p>
+              <% if user == current_user %>
+              <div class="call-to-action">
+                </a>
+                  <a class="btn btn-default more" data-toggle="modal" data-target="#editProfileModal">Edit Profile<i class="pl-10 fa fa-user"></i>
+                </a>
+              </div>
+              <%= render 'users/editProfileModal'%>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
-<% end %>
+  <!-- page-top end -->
 
 
-<!-- make a walk request -->
-<% if user == current_user %>
-  <%= link_to "Make Walk Request", new_request_path %>
-<% end %>
+  <!-- Show all pets -->
+  <!-- main-container start -->
+  <!-- ================ -->
+  <section class="main-container gray-bg">
 
-<!-- list all scheduled walks -->
-<hr>
-<h1>Dogs <%= user.first_name %> Will Walk:</h1>
-<!-- show's message if no walks scheduled -->
-<% if current_user.walks.length == 0 %>
- <em>You have no walks scheduled. Go walk someones pet!</em>
-<% end %>
-<div class="row">
-  <% user.pending_walks.each do |walk| %>
-    <div class="col-xs-4">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <%= render walk %>
-          <hr>
-          <%= link_to "View Walk Details", walk_path(walk) %>
+    <!-- main start -->
+    <!-- ================ -->
+    <div class="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center title">Pets</h1>
+            <div class="row">
+              <%= render user.pets %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  <% end %>
-</div>
+    <!-- add a pet -->
+    <% if user == current_user %>
+    <div class="call-to-action">
+      </a>
+        <a class="btn btn-default more" data-toggle="modal" data-target="#addPetModal">Add Pet<i class="pl-10 fa fa-paw"></i>
+      </a>
+    </div>
+    <% end %>
+    <!-- main end -->
+    <%= render 'users/addPetModal' %>
+
+
+  </section>
+  <!-- main-container end -->
+
+
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+  <div class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="page-title text-center">Walks</h1>
+        <p class="lead text-center">See All Of Your Requests and Walks</p>
+        <!-- page-title end -->
+
+        <!-- isotope filters start -->
+        <div class="filters text-center">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#" data-filter="*">All</a></li>
+            <% if user == current_user %>
+              <li><a href="#" data-filter=".open-requests">Your Open Requests</a></li>
+              <li><a href="#" data-filter=".closed-requests">Your Closed Requests</a></li>
+            <% else %>
+              <li><a href="#" data-filter=".open-requests"><%= user.first_name  %>'s' Walk Requests</a></li>
+            <% end %>
+            <li><a href="#" data-filter=".walks">Dogs <%= user == current_user ? "You" : user.first_name %> Will Walk:</a></li>
+          </ul>
+        </div>
+        <!-- isotope filters end -->
+
+      </div>
+      <!-- main end -->
+    </div>
+  </div>
+
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="gray-bg section">
+    <div class="container">
+      <!-- portfolio items start -->
+      <div class="isotope-container row equal-height-panels grid-space-10">
+        <%= render user.active_requests %>
+        <% if user == current_user %>
+          <%= render user.fulfilled_requests %>
+        <% end %>
+        <%= render user.pending_walks %>
+      </div>
+      <!-- portfolio items end -->
+    </div>
+    <!-- make a walk request -->
+    <% if user == current_user %>
+    <div class="call-to-action">
+      </a>
+        <a class="btn btn-default more" data-toggle="modal" data-target="#requestModal">Request A Walk<i class="pl-10 fa fa-paw"></i>
+      </a>
+    </div>
+    <%= render 'users/requestModal' %>
+    <% end %>
+  </div>
+  <!-- section end -->
+</section>
+<!-- main-container end -->
+
+
+<!-- list all scheduled walks -->
+<!-- <hr> -->
+<!-- <h1>Dogs <%#= user.first_name %> Will Walk:</h1> -->
+<!-- show's message if no walks scheduled -->
+<%# if current_user.walks.length == 0 %>
+ <!-- <em>You have no walks scheduled. Go walk someones pet!</em> -->
+<%# end %>
+<!-- <div class="row"> -->
+  <%#= user.pending_walks.each do |walk| %>
+    <!-- <div class="col-xs-4"> -->
+      <!-- <div class="panel panel-default"> -->
+        <!-- <div class="panel-body"> -->
+          <%#= render walk %>
+          <!-- <hr> -->
+          <%# link_to "View Walk Details", walk_path(walk) %>
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <%# end %>
+<!-- </div> -->
