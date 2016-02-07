@@ -10,7 +10,16 @@ class User < ActiveRecord::Base
   has_many :walks, :foreign_key => "walker_id"
   has_many :notifications, :foreign_key => "recipient_id"
   geocoded_by :address
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode, :if => :address_present?
+  after_initialize :init
+
+  def init
+    self.address1 ||= ""
+    self.address2 ||= ""
+    self.city ||= ""
+    self.state ||= ""
+    self.zipcode ||= ""
+  end
 
   def name
     self.first_name + " " + self.last_name
@@ -54,7 +63,12 @@ class User < ActiveRecord::Base
 
   #location
   def address
+
     address1 + " " + address2 + " " + city + " " + state + " " + zipcode
+  end
+
+  def address_present?
+    self.address.strip != ""
   end
 
   private
