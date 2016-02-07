@@ -9,10 +9,24 @@ class User < ActiveRecord::Base
   has_many :requests, :foreign_key => "owner_id"
   has_many :walks, :foreign_key => "walker_id"
   has_many :notifications, :foreign_key => "recipient_id"
+
+  geocoded_by :address
+  after_validation :geocode, :if => :address_present?
+  after_initialize :init
+
+  def init
+    self.address1 ||= ""
+    self.address2 ||= ""
+    self.city ||= ""
+    self.state ||= ""
+    self.zipcode ||= ""
+  end
+
   has_many :friendships
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
 
   def name
     self.first_name + " " + self.last_name
@@ -53,6 +67,16 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  #location
+  def address
+
+    address1 + " " + address2 + " " + city + " " + state + " " + zipcode
+  end
+
+  def address_present?
+    self.address.strip != ""
+  end
   def friends
     friend_ids = User.first.friendships.map {|friendship| friendship.friend_id}
     friend_ids.map {|id| User.find(id)}
