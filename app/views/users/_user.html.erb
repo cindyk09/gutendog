@@ -128,7 +128,7 @@
       <!-- portfolio items end -->
     </div>
     <!-- make a walk request -->
-    <% if user == current_user %>
+    <% if user == current_user && current_user.pets.size > 0%>
     <div class="call-to-action">
       </a>
         <a class="btn btn-default more" data-toggle="modal" data-target="#requestModal">Request A Walk<i class="pl-10 fa fa-paw"></i>
