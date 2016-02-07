@@ -1,24 +1,50 @@
-<h1>Community</h1>
-<div class="row">
-  <% @users.each do |user| %>
-    <div class="col-xs-4 text-center">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title "><%=link_to user.name, user_path(user) %></h3>
-          <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
-        </div>
-        <div class="panel-body">
-          <h4>Pets</h4>
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
 
-            <% user.pets.each do |pet| %>
-              <%= link_to image_tag(pet.image_url(:thumb).to_s), pet %>
-            <% end %>
+  <di v class="container">
+    <div class="row">
 
-          <p><strong><%= link_to "#{user.first_name}'s Open Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
 
-        </div>
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="text-center title">Community</h1>
+        <p class="text-center title">Dog Watch Members<br class="hidden-sm hidden-xs"></p>
+        <!-- page-title end -->
+
       </div>
+      <!-- main end -->
     </div>
-  <% end %>
-</div>
-Status API Training Shop Blog About Pricing
+  </div>
+
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="gray-bg section">
+    <div class="container">
+      <!-- portfolio items start -->
+
+      <div class="isotope-container row grid-space-10">
+        <!-- All members block -->
+        <% @users.each do |user| %>
+        <div class="col-sm-6 col-md-4 isotope-item app-development">
+          <div class="box-style-1 white-bg">
+            <h2 class="text-center title"><%=link_to user.name, user_path(user) %></h2>
+            <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
+            <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
+            <div class="row">
+              <h3 class="text-center title">Pets:</h3>
+              <%= render user.pets %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <!-- portfolio items end -->
+    </div>
+  </div>
+  <!-- section end -->
+</section>
+<!-- main-container end -->

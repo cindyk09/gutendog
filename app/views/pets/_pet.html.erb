@@ -13,7 +13,7 @@
 
     <div class="col-sm-4">
       <div class="box-style-1 white-bg object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
-        <h2><%= link_to pet.name, pet %></h2>
+        <p><%= link_to pet.name, pet %></p>
         <%= image_tag(pet.image_url(:small_thumb).to_s, class:"center-block")%>
         <div class="space"></div>
       </div>
