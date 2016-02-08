@@ -13,8 +13,8 @@
         <!-- page-title end -->
 
         <ul>
-          <% @notifications.each do |notification| %>
-            <li class="submitted"><%= notification.message %></li>
+          <% @notifications.reverse_each do |notification| %>
+            <li class=""><%= notification.message %></li>
           <% end %>
         </ul>
 

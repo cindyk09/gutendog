@@ -2,6 +2,7 @@ class Notification < ActiveRecord::Base
   belongs_to :recipient, class_name: "User"
   belongs_to :walk
   belongs_to :request
+  belongs_to :friend_requester, class_name: "User"
 
   def dog_walked
     # "Kevin Mircovich walked: Reece, and Drake"
@@ -11,6 +12,10 @@ class Notification < ActiveRecord::Base
   def request_accepted
     # "Kevin Mircovich accepted your request to walk Reece, and Drake on 2016-02-12 16:21:21 UTC"
     "#{walk.walker.name} accepted your request to walk" + list_dog_names(walk.pets) + " on #{self.walk.request.start_time}"
+  end
+
+  def friend_request
+    friend_requester.name + " sent you a friend request!"
   end
 
   def truncated
