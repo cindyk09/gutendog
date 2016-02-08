@@ -1,20 +1,8 @@
-    <!-- <div class="col-lg-6 col-md-12">
-      <div class="image-box team-member option-3">
-        <div class="overlay-container">
-          <%# link_to image_tag(pet.image_url(:thumb).to_s), pet %>
-        </div>
-        <div class="image-box-body">
-          <h3 class="title"><%# link_to pet.name, pet %></h3>
-          <div class="separator-2"></div>
-          <p><%# pet.description %></p>
-        </div>
-      </div>
-    </div> -->
-
-    <div class="col-sm-4">
-      <div class="box-style-1 white-bg object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
-        <p><%= link_to pet.name, pet %></p>
-        <%= image_tag(pet.image_url(:small_thumb).to_s, class:"center-block")%>
-        <div class="space"></div>
-      </div>
+<div class="col-sm-4">
+  <div class="image-box team-member white-bg">
+    <%= link_to image_tag(pet.image_url(:big_thumb)), pet_path(pet) %>
+    <div class="image-box-body">
+      <h3 class="title text-center"><%= link_to pet.name, pet_path(pet) %></h3>
     </div>
+  </div>
+</div>

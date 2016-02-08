@@ -1,5 +1,28 @@
-<h1>Your Pets</h1>
-<ul>
-  <%= render @pets %>
-</ul>
-<%= link_to "Add Pet", new_pet_path %>
+<section class="main-container" style="margin-top: 0px;">
+  <div class="text-center">
+    <h1 class="title">Your Pets</h1>
+  </div>
+
+  <div class="spacer-15"></div>
+
+  <div class="section gray-bg clearfix">
+    <% @pets.each do |pet| %>
+      <div class="col-sm-4">
+        <div class="image-box team-member white-bg">
+          <div class="overlay-container">
+            <%= link_to image_tag(pet.image_url(:big_thumb)), pet_path(pet) %>
+          </div>
+          <div class="image-box-body">
+            <h3 class="title text-center"><%= link_to pet.name, pet_path(pet) %></h3>
+            <!-- <div class="separator-2"></div>
+            <p><%# pet.description %></p> -->
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="call-to-action">
+      <a class="btn btn-default more" data-toggle="modal" data-target="#addPetModal">Add Pet<i class="pl-10 fa fa-paw"></i>
+    </a>
+  </div>
+</section>
