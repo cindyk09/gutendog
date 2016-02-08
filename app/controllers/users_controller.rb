@@ -2,11 +2,18 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @pending_friends = current_user.pending_friends
+    @friends = current_user.real_friends
     if params[:search].present?
-     @users = User.near(current_user, params[:search])
-     @users = @users.select{|user| user != current_user}
+      @users = User.near(current_user, params[:search])
+      @users = @users.select{|user| user != current_user}
    else
-     @users = []
+      @users = []
+   end
+
+   respond_to do |format|
+     format.html {}
+     format.js {}
    end
  end
 
