@@ -1,0 +1,26 @@
+<section class="main-container" style="margin-top: 0px;">
+
+  <div class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="text-center title">Notifications</h1>
+        <!-- page-title end -->
+
+        <ul>
+          <% @notifications.each do |notification| %>
+            <li class="submitted"><%= notification.message %></li>
+          <% end %>
+        </ul>
+
+      </div>
+      <!-- main end -->
+    </div>
+  </di></section>
+
+<!-- <div class="space"></div> -->

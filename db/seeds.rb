@@ -6,37 +6,37 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# puts "Seeding users..."
-#
-# 20.times do
-#
-#   user1 = User.new(
-#     first_name: Faker::Name.first_name,
-#     last_name: Faker::Name.last_name,
-#     phone_number: Faker::PhoneNumber.phone_number,
-#     email: Faker::Internet.email,
-#     address1: Faker::Address.street_address,
-#     address2: Faker::Address.secondary_address,
-#     city: Faker::Address.city,
-#     state: Faker::Address.state,
-#     zipcode: Faker::Address.zip,
-#     password: "password123",
-#     password_confirmation: "password123"
-#   )
-#
-#   n = rand(4) + 1
-#
-#   n.times do
-#     pet1 = Pet.new(
-#       name: Faker::Name.first_name,
-#       description: Faker::Hipster.paragraph
-#     )
-#     user1.pets << pet1
-#
-#     user1.save
-#     pet1.save
-#   end
-# end
+puts "Seeding users..."
+
+20.times do
+
+  user1 = User.new(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    phone_number: Faker::PhoneNumber.phone_number,
+    email: Faker::Internet.email,
+    address1: Faker::Address.street_address,
+    address2: Faker::Address.secondary_address,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    zipcode: Faker::Address.zip,
+    password: "password123",
+    password_confirmation: "password123"
+  )
+
+  n = rand(4) + 1
+
+  n.times do
+    pet1 = Pet.new(
+      name: Faker::Name.first_name,
+      description: Faker::Hipster.paragraph
+    )
+    user1.pets << pet1
+
+    user1.save
+    pet1.save
+  end
+end
 
 puts "Making requests"
 

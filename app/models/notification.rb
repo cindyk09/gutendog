@@ -13,6 +13,10 @@ class Notification < ActiveRecord::Base
     "#{walk.walker.name} accepted your request to walk" + list_dog_names(walk.pets) + " on #{self.walk.request.start_time}"
   end
 
+  def truncated
+    message[0..40]# + "..."
+  end
+
   private
 
   def list_dog_names(collection)
