@@ -8,16 +8,22 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="call-to-action">
             <h1 class="title"><%= user.name%></h1>
+
+            <% if current_user.friend_of(user) || user == current_user %>
               <a class="btn btn-white user-info">
                 User Info<i class="pl-10 fa fa-info"></i>
               </a>
+            <% end %>
             <!-- <a class="btn btn-default">
             Add Friend<i class="pl-10 fa fa-paw"></i>
             </a> -->
-            <% if !current_user.friend_of(user) && user != current_user %>
+            <% if user.pending_friends.include?(current_user) %>
+            <div class="space"></div>
+            <p><em>Friend Request Pending</em></p>
+            <% elsif !current_user.friend_of(user) && user != current_user %>
               <div id="community-index-<%= user.id %>-message"></div>
               <div id="community-index-<%= user.id %>">
-                <%= button_to friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"} do %>
+                <%= button_to friend_request_path, {remote: true, params: {friend_id: user.id}, class:"btn btn-default"} do %>
                 Add Friend<i class="pl-10 fa fa-paw"></i>
                 <% end %>
               </div>
@@ -78,7 +84,7 @@
   <!-- main-container end -->
 
 
-
+<% if current_user.friend_of(user) || user == current_user %>
 <!-- main-container start -->
 <!-- ================ -->
 <section class="main-container">
@@ -142,6 +148,7 @@
   </div>
   <!-- section end -->
 </section>
+<% end %>
 <!-- main-container end -->
 
 
