@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205192301) do
+ActiveRecord::Schema.define(version: 20160208021121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,10 +34,12 @@ ActiveRecord::Schema.define(version: 20160205192301) do
     t.integer  "walk_id"
     t.integer  "request_id"
     t.string   "message"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "friend_requester_id"
   end
 
+  add_index "notifications", ["friend_requester_id"], name: "index_notifications_on_friend_requester_id", using: :btree
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["request_id"], name: "index_notifications_on_request_id", using: :btree
   add_index "notifications", ["walk_id"], name: "index_notifications_on_walk_id", using: :btree
