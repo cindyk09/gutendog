@@ -10,12 +10,12 @@
       <div class="col-sm-4">
         <div class="image-box team-member white-bg">
           <div class="overlay-container">
-            <img src="https://www.petfinder.com/wp-content/uploads/2012/11/dog-how-to-select-your-new-best-friend-thinkstock99062463.jpg" alt="">
+            <%= link_to image_tag(pet.image_url(:big_thumb)), pet_path(pet) %>
           </div>
           <div class="image-box-body">
-            <h3 class="title"><%= link_to pet.name, pet_path(pet) %></h3>
-            <div class="separator-2"></div>
-            <p><%= pet.description %></p>
+            <h3 class="title text-center"><%= link_to pet.name, pet_path(pet) %></h3>
+            <!-- <div class="separator-2"></div>
+            <p><%# pet.description %></p> -->
           </div>
         </div>
       </div>
