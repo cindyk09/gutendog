@@ -5,7 +5,7 @@
     <div class="box-style-1 white-bg">
       <!-- Main Info -->
       <% if walk.walker == current_user %>
-        <h3>You will walk <%= walk.pets.size %> pups for <%= walk.request.owner.first_name %></h3>
+        <h3>You will walk <%= pluralize(walk.pets.size, "pup") %> for <%= walk.request.owner.first_name %></h3>
       <% else %>
         <h3><%= walk.walker.first_name %> will walk <%= walk.pets.size %> pups for <%= walk.request.owner.first_name %></h3>
       <% end %>

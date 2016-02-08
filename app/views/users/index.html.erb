@@ -40,12 +40,9 @@
         <div class="col-sm-6 col-md-4 isotope-item app-development">
           <div class="box-style-1 white-bg">
             <h2 class="text-center title"><%=link_to user.name, user_path(user) %></h2>
+            <p><%= user.first_name%> has <%=pluralize(user.pets.size, "pup") %>.</p>
             <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
             <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
-            <div class="row">
-              <h3 class="text-center title">Pets:</h3>
-              <%= render user.pets %>
-            </div>
           </div>
         </div>
         <% end %>
