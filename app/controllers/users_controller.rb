@@ -2,9 +2,14 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.all.select { |user| user != current_user  }
-    @users = @users.sort_by { |user| user.last_name  }
-  end
+    if params[:search].present?
+     @users = User.near(current_user, params[:search])
+     @users = @users.select{|user| user != current_user}
+   else
+     @users = []
+   end
+ end
+
 
   def new
     @user = User.new

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
+
   post 'friendships/create' => 'friendships#create', as: 'friend_request'
 
   patch 'friendships/update' => 'friendships#update', as: 'confirm_friend'
