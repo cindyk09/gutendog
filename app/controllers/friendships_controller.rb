@@ -25,5 +25,13 @@ class FriendshipsController < ApplicationController
   end
 
   def update
+    @new_friend = User.find(params['user_id'])
+    friendship = Friendship.find_by(user_id: @new_friend.id, friend_id: params[:friend_id])
+    friendship.confirmed = true
+    friendship.save
+    respond_to do |format|
+      format.html { redirect_to user_path(@new_friend) }
+      format.js { }
+    end
   end
 end

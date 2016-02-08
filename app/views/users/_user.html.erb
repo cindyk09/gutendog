@@ -15,9 +15,12 @@
             Add Friend<i class="pl-10 fa fa-paw"></i>
             </a> -->
             <% if !current_user.friend_of(user) && user != current_user %>
-              <%= button_to friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"} do %>
-              Add Friend<i class="pl-10 fa fa-paw"></i>
-              <% end %>
+              <div id="community-index-<%= user.id %>-message"></div>
+              <div id="community-index-<%= user.id %>">
+                <%= button_to friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"} do %>
+                Add Friend<i class="pl-10 fa fa-paw"></i>
+                <% end %>
+              </div>
             <% end %>
             <div id="show-peronal-info" style="display:none">
               <p>Address: <%= user.address1 || "n/a" %> <%= user.address2 %> <%= user.city %> <%= user.state %></p>

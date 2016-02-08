@@ -29,7 +29,7 @@
 
       <div class="isotope-container row grid-space-10">
         <!-- All members block -->
-        <% if @friends.size == 0 %>
+        <% if @friends.size == 0 && @pending_friends.size==0 %>
           <h2 class="text-center title">Search for friends below!</h2>
         <% else %>
           <% @pending_friends.each do |user| %>
@@ -39,9 +39,12 @@
                 <p><%= user.first_name%> has <%=pluralize(user.pets.size, "pup") %>.</p>
                 <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
                 <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
-                <%= button_to confirm_friend_path, {remote: true, params: {user_id: user.id, friend_id: current_user.id}, class:"btn btn-default"} do %>
-                Confirm Friend
-                <% end %>
+                <div id="friend-index-<%= user.id %>-message"></div>
+                <div id="friend-index-<%= user.id %>">
+                  <%= button_to confirm_friend_path, {remote: true, params: {user_id: user.id, friend_id: current_user.id}, class:"btn btn-default"} do %>
+                  Confirm Friend
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
@@ -52,6 +55,8 @@
                 <p><%= user.first_name%> has <%=pluralize(user.pets.size, "pup") %>.</p>
                 <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
                 <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
+                <div class="space"></div>
+                <div class="space"></div>
               </div>
             </div>
           <% end %>
@@ -70,6 +75,7 @@
 
         <!-- page-title start -->
         <!-- ================ -->
+        <div class="space"></div>
         <h1 class="text-center title">Community</h1>
         <p class="text-center title">Dog Watch Members<br class="hidden-sm hidden-xs"></p>
         <!-- page-title end -->
@@ -79,7 +85,7 @@
     </div>
   </div>
   <div class="text-center">
-    <%= form_tag users_path, :method => :get, remote: true do %>
+    <%= form_tag users_path, :method => :get do %>
     <p>Find dog owners and walkers near you.</p>
     <%= label_tag :search, "Find users within: " %>
     <%= number_field_tag :search, params[:search] %> miles

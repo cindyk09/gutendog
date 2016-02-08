@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   post 'friendships/create' => 'friendships#create', as: 'friend_request'
 
-  patch 'friendships/update' => 'friendships#update', as: 'confirm_friend'
+  post 'friendships/update' => 'friendships#update', as: 'confirm_friend'
   get 'friendships' => 'friendships#index', as: "friends"
   resources :walks, only: [:show, :create, :update]
   resources :requests, only: [:index, :new, :create, :show, :edit]
