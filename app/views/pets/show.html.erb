@@ -13,15 +13,14 @@
         <div class="separator-2"></div>
         <div class="space"></div>
         <!-- page-title end -->
-        
+
         <div class="row">
           <div class="col-lg-4 col-sm-4">
             <div class="box-style-1 gray-bg team-member">
               <div class="overlay-container">
-                <%= image_tag @pet.image_url(:thumb).to_s %>
-                <img src="https://www.petfinder.com/wp-content/uploads/2012/11/dog-how-to-select-your-new-best-friend-thinkstock99062463.jpg" alt="">
+                <%= image_tag @pet.image_url(:big_thumb).to_s %>
               </div>
-              <h3>Dog Type</h3>
+              <!-- <h3>Dog Type</h3> -->
             </div>
           </div>
           <div class="col-lg-5 col-sm-8">
@@ -63,7 +62,7 @@
           <%= render 'pets/editPetModal' %>
         <% end %>
       <!-- end current user options -->
-        
+
 
     </div>
   </div>
