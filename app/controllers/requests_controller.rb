@@ -16,8 +16,13 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.owner = current_user
+
     if @request.save
-      redirect_to root_path
+    
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js {render 'requests/create' }
+      end
     else
       render :new
     end
@@ -30,7 +35,25 @@ class RequestsController < ApplicationController
   def edit
   end
 
+  def destroy
+    @request = Request.find(params['id'])
+    if @request.walk
+      notif = Notification.new(walk: @request.walk, recipient: @request.walk.walker)
+      notif.message = notif.request_cancellation
+      notif.walk_id = nil
+      notif.save
+    end
+
+    @request.destroy
+
+    respond_to do |format|
+      format.html { render 'requests/destroy.js.erb' }
+      format.js { render 'requests/destroy.js.erb' }
+    end
+  end
+
   private
+
   def request_params
     params.require(:request).permit(:start_time, :end_time, :pickup)
   end

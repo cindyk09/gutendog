@@ -1,5 +1,32 @@
 <div class="col-sm-6 col-md-4 isotope-item <% if request.active? %>open-requests<% else %>closed-requests <% end %>">
+  <div id="request-<%= request.id %>-message"></div>
+  <div id="request-<%= request.id %>">
   <div class="box-style-1 white-bg">
+    <div>
+      <% if request.owner == current_user %>
+        <button type="button" class="close" data-toggle="modal" data-target="#cancelRequestModal-<%= request.id %>"><span aria-hidden="true">×</span></button>
+
+        <!-- Begin Modal -->
+        <div class="modal fade" id="cancelRequestModal-<%= request.id %>" tabindex="-1" role="dialog" aria-labelledby="cancelRequestModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" id="close-cancelRequestModal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="addPetModal">Cancel Request</h4>
+              </div>
+              <div class="modal-body">
+                <h4 class="text-center">Are you sure you want to delete this request?</h4>
+                <div class="call-to-action">
+                  <%= button_to request_path(request.id), {method: :delete, class:"btn btn-default text-center", remote: true} do  %>
+                  Yes
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+		</div>
     <h3>Request to walk <%= pluralize(request.owner.pets.size, "pup") %> for <%= request.owner.name %></h3>
 
     <%# link_to "See Details", request_path(request), data:{no_turbolink: true} %>
@@ -27,5 +54,7 @@
       <p><%= request.walk.walker.first_name %> will walk the pups</p>
       <div class="space"></div>
     <% end %>
+    <br>
   </div>
+</div>
 </div>

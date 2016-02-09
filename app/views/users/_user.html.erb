@@ -163,7 +163,7 @@
   <div class="gray-bg section">
     <div class="container">
       <!-- portfolio items start -->
-      <div class="isotope-container row equal-height-panels grid-space-10">
+      <div class="isotope-container row equal-height-panels grid-space-10" id="requests-walks-container">
         <%= render user.active_requests %>
         <% if user == current_user %>
           <%= render user.fulfilled_requests %>
@@ -175,7 +175,7 @@
     <!-- make a walk request -->
     <% if user == current_user && current_user.pets.size > 0%>
     <div class="call-to-action">
-      </a>
+      <a>
         <a class="btn btn-default more" data-toggle="modal" data-target="#requestModal">Request A Walk<i class="pl-10 fa fa-paw"></i>
       </a>
     </div>
