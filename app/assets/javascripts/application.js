@@ -29,6 +29,7 @@
 //= require template
 //= require custom
 //= require_tree .
+//= require vis
 
 $( document ).on('ready page:load', function () {
   $('.user-info').on('click', function () {

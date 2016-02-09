@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="requestModal">Request A Walk</h4>
       </div>
       <div class="modal-body">
-        <%= form_for Request.new(start_time: DateTime.now, end_time: DateTime.now) do |f| %>
+        <%= form_for Request.new(start_time: Date.today, end_time: Date.today) do |f| %>
 
           <div class="text-center">
             <%= f.label :start_time, "Start Time" %>

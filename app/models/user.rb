@@ -54,14 +54,14 @@ class User < ActiveRecord::Base
   end
 
   def fulfilled_requests
-      requests.select do |request|
-        !request.active?
-      end
+    requests.select do |request|
+      !request.active?
     end
+  end
 
-    def karma
-      self.walks.select{|walk| walk.completed}.size
-    end
+  def karma
+    self.walks.select{|walk| walk.completed}.size
+  end
 
   def pending_walks
     walks.map{ |w| w if !w.completed }.compact
@@ -78,6 +78,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def scheduled_walks
+    self.fulfilled_requests.map do |request|
+      if !request.walk.completed
+        request.walk
+      end
+    end.compact
+  end
 
   #location
   def address
@@ -91,6 +98,20 @@ class User < ActiveRecord::Base
   def friends
     friend_ids = User.first.friendships.map {|friendship| friendship.friend_id}
     friend_ids.map {|id| User.find(id)}
+  end
+
+  def request_and_walks_for_json
+    array = []
+    self.active_requests.each do |request|
+      array << {content:"You Need Walker", start_time:request.start_time, end_time:request.end_time}
+    end
+    self.scheduled_walks.each do |walk|
+      array << {content:"#{walk.walker.first_name}'s Walking The Pups", start_time:walk.request.start_time, end_time:walk.request.end_time}
+    end
+    self.pending_walks.each do |walk|
+      array << {content:"You're Walking #{walk.request.owner.first_name}'s' Pups", start_time:walk.request.start_time, end_time:walk.request.end_time}
+    end
+    array
   end
 
   private

@@ -77,3 +77,6 @@ gem 'figaro'
 #Location finder gems
 gem 'geocoder'
 gem 'gmaps4rails'
+
+# Timeline
+gem 'visjs-rails'
