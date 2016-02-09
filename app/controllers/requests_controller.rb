@@ -3,6 +3,10 @@ class RequestsController < ApplicationController
 
   def index
     @requests = Request.active_requests #requests should only be seen by friends
+    respond_to do |format|
+      format.html {}
+      format.json {render json: current_user.request_and_walks_for_json}
+    end
   end
 
   def new
