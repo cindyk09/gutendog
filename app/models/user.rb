@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   has_many :walks, :foreign_key => "walker_id"
   has_many :notifications, :foreign_key => "recipient_id"
 
+  has_many :friendships
+  # has_many :friends, through: :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  # has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
   geocoded_by :address
   after_validation :geocode, :if => :address_present?
   after_initialize :init
@@ -22,11 +27,17 @@ class User < ActiveRecord::Base
     self.zipcode ||= ""
   end
 
-  has_many :friendships
-  has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  def real_friends
+    self.friendships.map{|friendship| friendship.friend if friendship.confirmed}.compact + self.inverse_friendships.map{|friendship| friendship.user if friendship.confirmed}.compact
+  end
 
+  def pending_friends
+    self.inverse_friendships.map{|friendship| friendship.user if !friendship.confirmed}.compact
+  end
+
+  def friend_of(user)
+    self.real_friends.include?(user)
+  end
 
   def name
     self.first_name + " " + self.last_name

@@ -1,1 +1,4 @@
-alert("Friend Request Sent.")
+$('#community-index-' + <%= @new_friend.id %> + '-message').append('<div class="space"></div><p class="text-center"><em>Friend Request Sent!</em></p>')
+
+
+$('#community-index-'+<%= @new_friend.id %>).hide()

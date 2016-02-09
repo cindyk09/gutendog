@@ -11,6 +11,17 @@ class Pet < ActiveRecord::Base
     else
       description
     end
-    
+
+  end
+
+  def owner_friends?(user)
+    friends = false
+    self.owners.each do |owner|
+      if owner.friend_of(user)
+        friends = true
+        return true
+      end
+    end
+    return friends
   end
 end
