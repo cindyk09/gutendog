@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'notifications/index'
-
+  get 'walks/' => 'walks#index', as: "walks_json"
   post 'friendships/create' => 'friendships#create', as: 'friend_request'
 
   post 'friendships/update' => 'friendships#update', as: 'confirm_friend'

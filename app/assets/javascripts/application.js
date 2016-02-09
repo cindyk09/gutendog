@@ -29,6 +29,8 @@
 //= require template
 //= require custom
 //= require_tree .
+//= require vis
+
 "user strict";
 
 $( document ).on('ready page:load', function () {
@@ -45,7 +47,7 @@ $( document ).on('ready page:load', function () {
       $.ajax({
         url: '/requests/' + id,
         method: 'delete',
-        
+
         success: function (data) {
           console.log("success! from ajax call")
         }
@@ -55,25 +57,3 @@ $( document ).on('ready page:load', function () {
     };
   })
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,5 @@
 <!-- page-top start-->
-
+<% javascript_include_tag "timeline" %>
 <!-- Basic User Info -->
   <!-- ================ -->
   <div class="page-top">
@@ -87,6 +87,42 @@
 <% if current_user.friend_of(user) || user == current_user %>
 <!-- main-container start -->
 <!-- ================ -->
+<section class="main-container">
+
+  <div class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="page-title text-center"><%= user == current_user ? "Your" : user.first_name  %> Schedule</h1>
+        <!-- <p class="lead text-center"></p> -->
+        <!-- page-title end -->
+
+      </div>
+      <!-- main end -->
+    </div>
+  </div>
+
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="section">
+    <div class="container">
+      <div class="call-to-action" >
+          <a class="btn btn-default" id="today">Today</a>
+          <a class="btn btn-default" id="week">Week</a>
+      </div>
+      <!-- portfolio items start -->
+      <div id="visualization"></div>
+
+  </div>
+  <!-- section end -->
+</section>
+
+
 <section class="main-container">
 
   <div class="container">

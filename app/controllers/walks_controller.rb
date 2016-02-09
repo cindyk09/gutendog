@@ -8,7 +8,7 @@ class WalksController < ApplicationController
     request = Request.find(params['request_id'])
     @walk = Walk.new(walker: current_user, request: request)
     @walk.pets = request.owner.pets
-    
+
     if @walk.save
 
       notif = Notification.new(walk: @walk, recipient: @walk.request.owner)
@@ -19,6 +19,12 @@ class WalksController < ApplicationController
         format.html { redirect_to user_path(current_user) }
         format.js {  }
       end
+    end
+  end
+
+  def index
+    respond_to do |format|
+      format.json{render json: current_user.pending_walks}
     end
   end
 
