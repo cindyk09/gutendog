@@ -27,16 +27,16 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    request = Request.find(params['id'])
-
-    if request.walk
-      notif = Notification.new(walk: request.walk, recipient: request.walk.walker)
+    @request = Request.find(params['id'])
+    binding.pry
+    if @request.walk
+      notif = Notification.new(walk: @request.walk, recipient: @request.walk.walker)
       notif.message = notif.request_cancellation
       notif.walk_id = nil
       notif.save
     end
 
-    request.destroy
+    @request.destroy
 
     respond_to do |format|
       format.html { render 'requests/destroy.js.erb' }
@@ -45,7 +45,7 @@ class RequestsController < ApplicationController
   end
 
   private
-  
+
   def request_params
     params.require(:request).permit(:start_time, :end_time, :pickup)
   end

@@ -1,8 +1,16 @@
 <div class="col-sm-6 col-md-4 isotope-item <% if request.active? %>open-requests<% else %>closed-requests <% end %>">
+  <div id="request-<%= request.id %>-message"></div>
+  <div id="request-<%= request.id %>">
   <div class="box-style-1 white-bg">
+    <div>
+      <% if request.owner == current_user %>
+        <button type="button" class="close" data-toggle="modal" data-target="#cancelRequestModal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <%= render partial: 'requests/cancelRequestModal', locals: {request_id: request.id} %>
+      <% end %>
+		</div>
     <h3>Request to walk <%= pluralize(request.owner.pets.size, "pup") %> for <%= request.owner.name %></h3>
 
-    <%= link_to "See Details", request_path(request), data:{no_turbolink: true} %>
+    <%# link_to "See Details", request_path(request), data:{no_turbolink: true} %>
     <br>
     <strong>Start Time: </strong><%= request.start_time.strftime("%b %e, %l:%M %p")  %>
     <br>
@@ -28,31 +36,6 @@
       <div class="space"></div>
     <% end %>
 
-    <% if request.owner == current_user %>
-      <%# link_to "Cancel Request", delete_request_path, method: 'post', id: "cancel-request-btn"%>
-      <a class="cancel-request-btn" data-request-id=<%= request.id %>>Cancel Request</a>
-      <!-- <div class="call-to-action">
-        <a>
-          <a data-toggle="modal" data-target="#cancelRequestModal">Cancel Request</a>
-        </a>
-      </div>
-      
-      <%# render 'requests/cancelRequestModal' %>
-    -->
-    <% end %>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>

@@ -1,1 +1,6 @@
-alert("request canceled (in requests/destroy.js.erb)");
+$('#request-' + <%= @request.id %> + '-message').append('<p class="text-center">Walk Canceled!</p>')
+setTimeout(function() {
+  $('#request-' + <%= @request.id %> + '-message').remove();
+}, 2500);
+
+$('#request-' + <%= @request.id %>).hide(800)
