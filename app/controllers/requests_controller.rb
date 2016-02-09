@@ -12,8 +12,13 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.owner = current_user
+
     if @request.save
-      redirect_to root_path
+    
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js {render 'requests/create' }
+      end
     else
       render :new
     end
