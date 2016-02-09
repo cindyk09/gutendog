@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :ownerships, :foreign_key => "owner_id", dependent: :destroy
   has_many :pets, through: :ownerships
   has_many :requests, :foreign_key => "owner_id", dependent: :destroy
-  has_many :walks, :foreign_key => "walker_id"
+  has_many :walks, :foreign_key => "walker_id", dependent: :destroy
   has_many :notifications, :foreign_key => "recipient_id"
 
   has_many :friendships, dependent: :destroy
