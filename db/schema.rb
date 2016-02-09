@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208021121) do
+ActiveRecord::Schema.define(version: 20160209180748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,13 +115,12 @@ ActiveRecord::Schema.define(version: 20160208021121) do
 
   create_table "walks", force: :cascade do |t|
     t.integer  "walker_id"
-    t.integer  "request_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "completed",  default: false
+    t.integer  "request_id"
   end
 
-  add_index "walks", ["request_id"], name: "index_walks_on_request_id", using: :btree
   add_index "walks", ["walker_id"], name: "index_walks_on_walker_id", using: :btree
 
   add_foreign_key "friendships", "users"
@@ -133,6 +132,6 @@ ActiveRecord::Schema.define(version: 20160208021121) do
   add_foreign_key "petwalks", "pets"
   add_foreign_key "petwalks", "walks"
   add_foreign_key "requests", "users", column: "owner_id"
-  add_foreign_key "walks", "requests"
+  add_foreign_key "walks", "requests", on_delete: :cascade
   add_foreign_key "walks", "users", column: "walker_id"
 end

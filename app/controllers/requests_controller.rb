@@ -28,7 +28,6 @@ class RequestsController < ApplicationController
 
   def destroy
     @request = Request.find(params['id'])
-    binding.pry
     if @request.walk
       notif = Notification.new(walk: @request.walk, recipient: @request.walk.walker)
       notif.message = notif.request_cancellation
