@@ -52,32 +52,50 @@
                 </div>
               </div>
 
-              <div class="field">
+              <div class="form-group has-feedback">
                 <%= f.label :last_name, class:"col-sm-3 control-label" do %>
                 Last Name<span class="text-danger small">*</span><% end %>
-                <%= f.text_field :last_name %>
+                <div class="col-sm-8">
+                <%= f.text_field :last_name, class:"form-control", id:"last_name", placeholder:"Last Name"  %>
+                <i class="fa fa-pencil form-control-feedback"></i>
+                </div>
               </div>
 
-              <div class="field">
-                <%= f.label :email %>
-                <%= f.email_field :email, autofocus: true %>
+              <div class="form-group has-feedback">
+                <%= f.label :email, class:"col-sm-3 control-label" do %>
+                Email<span class="text-danger small">*</span><% end %>
+                <div class="col-sm-8">
+                <%= f.email_field :email, class:"form-control", id:"email", placeholder:"E-mail"  %>
+                <i class="fa fa-envelope form-control-feedback"></i>
+                </div>
               </div>
 
-              <div class="field">
-                <%= f.label :password %>
+              <div class="form-group has-feedback">
+                <%= f.label :password, class:"col-sm-3 control-label" do %>
+                Password<span class="text-danger small">*</span><% end %>
+                <div class="col-sm-8">
+                <%= f.password_field :password, class:"form-control", id:"password", placeholder:"Password"  %>
+                <i class="fa fa-lock form-control-feedback"></i>
                 <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> characters minimum)</em>
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "off" %>
+                <% end %>
+
+                </div>
               </div>
 
-              <div class="field">
-                <%= f.label :password_confirmation %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              <div class="form-group has-feedback">
+                <%= f.label :password_confirmation, class:"col-sm-3 control-label" do %>
+                Password Confirmation<span class="text-danger small">*</span><% end %>
+                <div class="col-sm-8">
+                <%= f.password_field :password_confirmation, class:"form-control", id:"password", placeholder:"Password Confirmation" %>
+                <i class="fa fa-lock form-control-feedback"></i>
+                </div>
               </div>
 
-              <div class="actions">
-                <%= f.submit "Sign up" %>
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-8">
+                <%= f.submit "Log in", class:"btn btn-group btn-light-gray btn-sm" %>
+                </div>
               </div>
             <% end %>
 
