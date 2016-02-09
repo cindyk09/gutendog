@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'schedule' => 'schedule#index', as: "schedule"
+
   get 'notifications/index'
   get 'walks/' => 'walks#index', as: "walks_json"
   post 'friendships/create' => 'friendships#create', as: 'friend_request'

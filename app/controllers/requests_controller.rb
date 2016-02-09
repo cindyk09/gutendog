@@ -18,10 +18,9 @@ class RequestsController < ApplicationController
     @request.owner = current_user
 
     if @request.save
-    
       respond_to do |format|
         format.html { redirect_to root_path }
-        format.js {render 'requests/create' }
+        format.js {}
       end
     else
       render :new

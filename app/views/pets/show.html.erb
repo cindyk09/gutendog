@@ -37,7 +37,7 @@
               <h2 class="title"><%= pluralize_without_count(@pet.owners.size, "Owner")  %></h2>
               <ul class="list-icons">
                 <% @pet.owners.each do |owner| %>
-                  <li><i class="fa fa-child pr-5"></i><a href=""><%= owner.name || "n/a" %></a></li>
+                  <li><i class="fa fa-child pr-5"></i><%= link_to owner.name, owner %></li>
                   <% if @pet.owner_friends?(current_user) %>
                     <li><i class="fa fa-phone pr-5"></i><%= owner.phone_number || "n/a" %></li>
                     <li><i class="fa fa-map-marker pr-5"></i><%= owner.city || "n/a" %></li>
