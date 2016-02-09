@@ -1,0 +1,48 @@
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+  <div class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="text-center title">Friends</h1>
+        <p class="text-center title">Your Dog Watch Friends<br class="hidden-sm hidden-xs"></p>
+        <!-- page-title end -->
+
+      </div>
+      <!-- main end -->
+    </div>
+  </div>
+
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="gray-bg section">
+    <div class="container">
+      <!-- portfolio items start -->
+
+      <div class="isotope-container row grid-space-10">
+        <!-- All members block -->
+        <% @users.each do |user| %>
+        <div class="col-sm-6 col-md-4 isotope-item app-development">
+          <div class="box-style-1 white-bg">
+            <h2 class="text-center title"><%=link_to user.name, user_path(user) %></h2>
+            <p><%= user.first_name%> has <%=pluralize(user.pets.size, "pup") %>.</p>
+            <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
+            <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <!-- portfolio items end -->
+    </div>
+  </div>
+  <!-- section end -->
+</section>
+<!-- main-container end -->

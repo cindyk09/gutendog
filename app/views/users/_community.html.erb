@@ -1,0 +1,25 @@
+      <!-- All members block -->
+      <% @users.each do |user| %>
+      <div class="col-sm-6 col-md-4 isotope-item app-development">
+          <div class="box-style-1 white-bg">
+            <h2 class="text-center title"><%=link_to user.name, user_path(user) %></h2>
+            <p><%= user.first_name%> has <%=pluralize(user.pets.size, "pup") %>.</p>
+            <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
+            <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
+            <% if !current_user.friend_of(user) && !user.pending_friends.include?(current_user) && user != current_user %>
+              <div id="community-index-<%= user.id %>-message"></div>
+              <div id="community-index-<%= user.id %>">
+                <%= button_to friend_request_path, {remote: true, params: {friend_id:  user.id}, class:"btn btn-default"} do %>
+                Add Friend
+                <% end %>
+              </div>
+            <% elsif user.pending_friends.include?(current_user) %>
+            <div class="space"></div>
+              <p><em>Friend Request Pending</em></p>
+            <% else %>
+              <div class="space"></div>
+              <div class="space"></div>
+            <% end %>
+          </div>
+      </div>
+      <% end %>

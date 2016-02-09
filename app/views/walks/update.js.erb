@@ -1,2 +1,6 @@
 $('#request-' + <%= @walk.id %> + '-message').append('<p class="text-center">Thanks for helping out <%= @walk.request.owner.first_name %>!</p>')
+setTimeout(function() {
+  $('#request-' + <%= @walk.id %> + '-message').remove();
+}, 2500);
+
 $('#request-' + <%= @walk.id %>).hide(800)
