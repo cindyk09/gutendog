@@ -1,4 +1,4 @@
-$('#close-cancelRequestModal').click();
+$('#close-cancelRequestModal-'+<%= @request.id %>).click();
 
 $('#request-' + <%= @request.id %> + '-message').append('<p class="text-center">Walk Canceled!</p>')
 setTimeout(function() {
