@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @requests = Request.active_requests #requests should only be seen by friends
+    @requests = Request.active_requests.select{|request| current_user.friend_of(request.owner)}
     respond_to do |format|
       format.html {}
       format.json {render json: current_user.request_and_walks_for_json}
