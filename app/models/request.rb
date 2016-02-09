@@ -1,6 +1,6 @@
 class Request < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
-  has_one :walk
+  has_one :walk, dependent: :destroy
 
   def active?
     !self.walk

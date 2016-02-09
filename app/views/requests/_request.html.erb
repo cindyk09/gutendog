@@ -27,5 +27,27 @@
       <p><%= request.walk.walker.first_name %> will walk the pups</p>
       <div class="space"></div>
     <% end %>
+
+    <% if request.owner == current_user %>
+      <%# link_to "Cancel Request", delete_request_path, method: 'post', id: "cancel-request-btn"%>
+      <a id="cancel-request-btn" data-request-id=<%= request.id %>>Cancel Request</a>
+    <% end %>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

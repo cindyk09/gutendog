@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   patch 'friendships/update' => 'friendships#update', as: 'confirm_friend'
 
   resources :walks, only: [:show, :create, :update]
-  resources :requests, only: [:index, :new, :create, :show, :edit]
+  resources :requests, only: [:index, :new, :create, :show, :edit, :destroy]
   resources :pets, only: [:index, :new, :create, :show, :edit, :update]
   devise_for :users, :controllers => { registrations: 'registrations', :omniauth_callbacks => 'users/omniauth_callbacks'}
   resources :users, only: [:show, :index]

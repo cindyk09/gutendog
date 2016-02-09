@@ -26,7 +26,27 @@ class RequestsController < ApplicationController
   def edit
   end
 
+  def destroy
+    request = Request.find(params['id'])
+
+    if request.walk
+      notif = Notification.new(walk: request.walk, recipient: request.walk.walker)
+      notif.message = notif.request_cancellation
+      notif.walk_id = nil
+      notif.save
+    end
+    binding.pry
+
+    request.destroy
+
+    respond_to do |format|
+      format.html { }
+      format.js { }
+    end
+  end
+
   private
+  
   def request_params
     params.require(:request).permit(:start_time, :end_time, :pickup)
   end

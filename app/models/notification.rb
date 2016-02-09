@@ -18,6 +18,10 @@ class Notification < ActiveRecord::Base
     friend_requester.name + " sent you a friend request!"
   end
 
+  def request_cancellation
+    "Brandyn Mayer canceled the walk for 2016-02-10 01:56:20 UTC. You're off the hook."
+  end
+
   def truncated
     message[0..40]# + "..."
   end
