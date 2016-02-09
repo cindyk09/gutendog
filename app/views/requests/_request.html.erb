@@ -30,13 +30,18 @@
 
     <% if request.owner == current_user %>
       <%# link_to "Cancel Request", delete_request_path, method: 'post', id: "cancel-request-btn"%>
-      <a id="cancel-request-btn" data-request-id=<%= request.id %>>Cancel Request</a>
+      <a class="cancel-request-btn" data-request-id=<%= request.id %>>Cancel Request</a>
+      <!-- <div class="call-to-action">
+        <a>
+          <a data-toggle="modal" data-target="#cancelRequestModal">Cancel Request</a>
+        </a>
+      </div>
+      
+      <%# render 'requests/cancelRequestModal' %>
+    -->
     <% end %>
   </div>
 </div>
-
-
-
 
 
 

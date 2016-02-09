@@ -29,6 +29,7 @@
 //= require template
 //= require custom
 //= require_tree .
+"user strict";
 
 $( document ).on('ready page:load', function () {
   $('.user-info').on('click', function () {
@@ -36,17 +37,17 @@ $( document ).on('ready page:load', function () {
     });
   });
 
-  $('#cancel-request-btn').on('click', function (event) {
+  $('.cancel-request-btn').on('click', function (event) {
     var response = confirm("Are you sure you want to delete this request?");
     console.log(response)
     if (response) {
-      var cancellation = document.getElementById("cancel-request-btn");
-      var id = cancellation.getAttribute("data-request-id");
+      var id = this.getAttribute("data-request-id");
       $.ajax({
         url: '/requests/' + id,
         method: 'delete',
+        
         success: function (data) {
-          console.log("success! " + data)
+          console.log("success! from ajax call")
         }
       });
     } else {

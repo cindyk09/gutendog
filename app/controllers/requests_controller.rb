@@ -35,13 +35,12 @@ class RequestsController < ApplicationController
       notif.walk_id = nil
       notif.save
     end
-    binding.pry
 
     request.destroy
 
     respond_to do |format|
-      format.html { }
-      format.js { }
+      format.html { render 'requests/destroy.js.erb' }
+      format.js { render 'requests/destroy.js.erb' }
     end
   end
 
