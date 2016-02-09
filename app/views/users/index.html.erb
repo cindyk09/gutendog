@@ -12,8 +12,8 @@
 
         <!-- page-title start -->
         <!-- ================ -->
-        <h1 class="text-center title">Community</h1>
-        <p class="text-center title">Dog Watch Members<br class="hidden-sm hidden-xs"></p>
+        <h1 class="text-center title">Friends</h1>
+        <p class="text-center title">Your Dog Watch Friends<br class="hidden-sm hidden-xs"></p>
         <!-- page-title end -->
 
       </div>
@@ -21,13 +21,6 @@
     </div>
   </div>
 
-  <%= form_tag users_path, :method => :get do %>
-  <p>Find dog owners and walkers near you.</p>
-  <%= label_tag :search, "Find users within: " %>
-  <%= number_field_tag :search, params[:search] %> miles
-  <br>
-  <%= submit_tag "Search", class:"btn btn-default", :name => nil %>
-  <% end %>
   <!-- section start -->
   <!-- ================ -->
   <div class="gray-bg section">
@@ -36,19 +29,81 @@
 
       <div class="isotope-container row grid-space-10">
         <!-- All members block -->
-        <% @users.each do |user| %>
-        <div class="col-sm-6 col-md-4 isotope-item app-development">
-          <div class="box-style-1 white-bg">
-            <h2 class="text-center title"><%=link_to user.name, user_path(user) %></h2>
-            <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
-            <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
-            <div class="row">
-              <h3 class="text-center title">Pets:</h3>
-              <%= render user.pets %>
+        <% if @friends.size == 0 && @pending_friends.size==0 %>
+          <h2 class="text-center title">Search for friends below!</h2>
+        <% else %>
+          <% @pending_friends.each do |user| %>
+            <div class="col-sm-6 col-md-4 isotope-item app-development">
+              <div class="box-style-1 white-bg">
+                <h2 class="text-center title"><%=link_to user.name, user_path(user) %></h2>
+                <p><%= user.first_name%> has <%=pluralize(user.pets.size, "pup") %>.</p>
+                <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
+                <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
+                <div id="friend-index-<%= user.id %>-message"></div>
+                <div id="friend-index-<%= user.id %>">
+                  <%= button_to confirm_friend_path, {remote: true, params: {user_id: user.id, friend_id: current_user.id}, class:"btn btn-default"} do %>
+                  Confirm Friend
+                  <% end %>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          <% end %>
+          <% @friends.each do |user| %>
+            <div class="col-sm-6 col-md-4 isotope-item app-development">
+              <div class="box-style-1 white-bg">
+                <h2 class="text-center title"><%=link_to user.name, user_path(user) %></h2>
+                <p><%= user.first_name%> has <%=pluralize(user.pets.size, "pup") %>.</p>
+                <p><%= user.first_name %>'s Walk Karma: <%= user.karma %></p>
+                <p><strong><%= link_to "#{user.first_name}'s Open Walk Requests: #{user.num_active_requests}", user_path(user)%></strong></p>
+                <div class="space"></div>
+                <div class="space"></div>
+              </div>
+            </div>
+          <% end %>
         <% end %>
+      </div>
+      <!-- portfolio items end -->
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <div class="space"></div>
+        <h1 class="text-center title">Community</h1>
+        <p class="text-center title">Dog Watch Members<br class="hidden-sm hidden-xs"></p>
+        <!-- page-title end -->
+
+      </div>
+      <!-- main end -->
+    </div>
+  </div>
+  <div class="text-center">
+    <%= form_tag users_path, :method => :get do %>
+    <p>Find dog owners and walkers near you.</p>
+    <%= label_tag :search, "Find users within: " %>
+    <%= number_field_tag :search, params[:search] %> miles
+    <br>
+    <%= submit_tag "Search", class:"btn btn-default", :name => nil %>
+    <% end %>
+  </div>
+
+
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="gray-bg section">
+    <div class="container">
+      <!-- portfolio items start -->
+      <div class="isotope-container row grid-space-10">
+        <div  id="community-search">
+          <%= render partial: 'users/community', locals: {users: @users} %>
+        </div>
       </div>
       <!-- portfolio items end -->
     </div>
