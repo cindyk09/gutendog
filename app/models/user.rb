@@ -103,13 +103,13 @@ class User < ActiveRecord::Base
   def request_and_walks_for_json
     array = []
     self.active_requests.each do |request|
-      array << {content:"You Need Walker", start_time:request.start_time, end_time:request.start_time}
+      array << {content:"You Need Walker", start_time:request.start_time, end_time:request.end_time}
     end
     self.scheduled_walks.each do |walk|
-      array << {content:"#{walk.walker.first_name}'s Walking The Pups", start_time:walk.request.start_time, end_time:walk.request.start_time}
+      array << {content:"#{walk.walker.first_name}'s Walking The Pups", start_time:walk.request.start_time, end_time:walk.request.end_time}
     end
     self.pending_walks.each do |walk|
-      array << {content:"You're Walking #{walk.request.owner.first_name}'s' Pups'", start_time:walk.request.start_time, end_time:walk.request.start_time}
+      array << {content:"You're Walking #{walk.request.owner.first_name}'s' Pups", start_time:walk.request.start_time, end_time:walk.request.end_time}
     end
     array
   end
