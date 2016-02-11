@@ -85,12 +85,12 @@
     </div>
   </div>
   <div class="text-center">
-    <%= form_tag users_path, :method => :get do %>
+    <%= form_tag users_path, :method => :get, remote: true do %>
     <p>Find dog owners and walkers near you.</p>
     <%= label_tag :search, "Find users within: " %>
     <%= number_field_tag :search, params[:search] %> miles
     <br>
-    <%= submit_tag "Search", class:"btn btn-default", :name => nil, remote: true %>
+    <%= submit_tag "Search", class:"btn btn-default", :name => nil %>
     <% end %>
   </div>
 

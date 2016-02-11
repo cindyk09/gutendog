@@ -12,6 +12,7 @@ class UsersController < ApplicationController
    end
 
    respond_to do |format|
+    #  binding.pry
      format.html {}
      format.js {}
    end
