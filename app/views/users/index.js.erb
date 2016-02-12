@@ -1,1 +1,2 @@
-$('#community-search').html(`<%= render partial: 'users/community', locals: {users: @users} %>`);
+var html = '<%= j render partial: 'users/community', locals: {users: @users} %>'
+$('#community-search').html(html);

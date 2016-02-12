@@ -10,9 +10,7 @@ class UsersController < ApplicationController
    else
       @users = []
    end
-
    respond_to do |format|
-    #  binding.pry
      format.html {}
      format.js {}
    end
