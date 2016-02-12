@@ -10,7 +10,6 @@ class UsersController < ApplicationController
    else
       @users = []
    end
-
    respond_to do |format|
      format.html {}
      format.js {}

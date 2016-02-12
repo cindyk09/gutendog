@@ -13,7 +13,7 @@
         <!-- page-title start -->
         <!-- ================ -->
         <h1 class="text-center title">Friends</h1>
-        <p class="text-center title">Your Dog Watch Friends<br class="hidden-sm hidden-xs"></p>
+        <p class="text-center title">Your Guten Dog Friends<br class="hidden-sm hidden-xs"></p>
         <!-- page-title end -->
 
       </div>
@@ -77,7 +77,7 @@
         <!-- ================ -->
         <div class="space"></div>
         <h1 class="text-center title">Community</h1>
-        <p class="text-center title">Dog Watch Members<br class="hidden-sm hidden-xs"></p>
+        <p class="text-center title">Guten Dog Members<br class="hidden-sm hidden-xs"></p>
         <!-- page-title end -->
 
       </div>
@@ -85,10 +85,10 @@
     </div>
   </div>
   <div class="text-center">
-    <%= form_tag users_path, :method => :get do %>
+    <%= form_tag users_path, :method => :get, remote: true do %>
     <p>Find dog owners and walkers near you.</p>
     <%= label_tag :search, "Find users within: " %>
-    <%= number_field_tag :search, params[:search] %> miles
+    <%= number_field_tag :search, params[:search], min: 0 %> miles
     <br>
     <%= submit_tag "Search", class:"btn btn-default", :name => nil %>
     <% end %>
@@ -100,10 +100,8 @@
   <div class="gray-bg section">
     <div class="container">
       <!-- portfolio items start -->
-      <div class="isotope-container row grid-space-10">
-        <div  id="community-search">
-          <%= render partial: 'users/community', locals: {users: @users} %>
-        </div>
+      <div class="isotope-container row grid-space-10" id="community-search">
+        <%= render partial: 'users/community', locals: {users: @users} %>
       </div>
       <!-- portfolio items end -->
     </div>
