@@ -41,7 +41,7 @@ $( document ).on('ready page:load', function () {
 
   $('.cancel-request-btn').on('click', function (event) {
     var response = confirm("Are you sure you want to delete this request?");
-    console.log(response)
+    console.log(response);
     if (response) {
       var id = this.getAttribute("data-request-id");
       $.ajax({
@@ -49,11 +49,11 @@ $( document ).on('ready page:load', function () {
         method: 'delete',
 
         success: function (data) {
-          console.log("success! from ajax call")
+          console.log("success! from ajax call");
         }
       });
     } else {
-      event.preventDefault()
-    };
-  })
+      event.preventDefault();
+    }
+  });
 });
