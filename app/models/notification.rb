@@ -19,6 +19,7 @@ class Notification < ActiveRecord::Base
   end
 
   def request_cancellation
+    # fix this to
     "Brandyn Mayer canceled the walk for 2016-02-10 01:56:20 UTC. You're off the hook."
   end
 
@@ -29,6 +30,7 @@ class Notification < ActiveRecord::Base
   private
 
   def list_dog_names(collection)
+    # try to refactor this method to something that would say current_user.pets.walked.name
     string = ""
     collection.each_with_index do |pet, index|
       if collection.count == 1 || pet == collection[0]

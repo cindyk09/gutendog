@@ -12,12 +12,10 @@ class WalksController < ApplicationController
       notif = Notification.new(walk: @walk, recipient: @walk.request.owner)
       notif.message = notif.request_accepted
       notif.save
-
-      respond_to do |format|
-        format.html { redirect_to user_path(current_user) }
-        format.js {  }
-      end
-
+        respond_to do |format|
+          format.html { redirect_to user_path(current_user) }
+          format.js {  }
+        end
     end
   end
 

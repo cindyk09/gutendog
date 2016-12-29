@@ -2,7 +2,6 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    binding.pry
     @requests = Request.active_requests.select{|request| current_user.friend_of(request.owner)}
     respond_to do |format|
       format.html {}
