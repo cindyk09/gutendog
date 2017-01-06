@@ -1,6 +1,6 @@
 class PetsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :search_pet, only: [:edit, :show, :update, :destroy]
+  before_action :search_pet, only: [:edit, :show, :update, :destroy]
 
   def index
     @pets = current_user.pets
@@ -21,16 +21,16 @@ class PetsController < ApplicationController
   end
 
   def show
-    @pet = current_user.pets.find(params[:id])
-    @pet = Pet.find(params[:id])
+    # @pet = current_user.pets.find(params[:id])
+    # @pet = Pet.find(params[:id])
   end
 
   def edit
-    @pet = Pet.find(params[:id])
+    # @pet = Pet.find(params[:id])
   end
 
   def update
-    @pet = Pet.find(params[:id])
+    # @pet = Pet.find(params[:id])
     @pet.update(pet_params)
     redirect_to @pet
   end
@@ -47,7 +47,7 @@ class PetsController < ApplicationController
   private
   def search_pet
     # binding.pry
-    # @pet = current_user.pets.find(params[:id])
+    @pet = current_user.pets.find(params[:id])
     # @pet = Pet.find(params[:id])
   end
 

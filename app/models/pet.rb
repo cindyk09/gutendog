@@ -6,6 +6,7 @@ class Pet < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def truncated_description
+    #This method isn't appearing anywhere else. What's the purpose for this?
     if description.length > 214
       description[0..170] + "..."
     else

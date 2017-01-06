@@ -38,13 +38,13 @@
               <ul class="list-icons">
                 <% @pet.owners.each do |owner| %>
                   <li><i class="fa fa-child pr-5"></i><%= link_to owner.name, owner %></li>
-                  <% if @pet.owner_friends?(current_user) %>
-                    <li><i class="fa fa-phone pr-5"></i><%= owner.phone_number || "n/a" %></li>
-                    <li><i class="fa fa-map-marker pr-5"></i><%= owner.city || "n/a" %></li>
-                  <% end %>
+                  <li><i class="fa fa-phone pr-5"></i><%= owner.phone_number || "N/A" %></li>
+                  <li><i class="fa fa-map-marker pr-5"></i><%= owner.city || "n/a" %></li>
+                  <!-- <% if @pet.owner_friends?(current_user) %> -->
+                  <!-- <% end %> -->
                   <br>
                 <% end %>
-              <!-- ul social media -->
+              </ul>
             </div>
           </div>
         </div>
